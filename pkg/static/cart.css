@@ -1,0 +1,17 @@
+.card-bin{
+    border: none;
+    margin-top: 100px;
+    min-height: 200px;
+    margin-bottom: 50px;
+  
+  }
+  .cart-back{
+    background-color: gray;
+  
+  }
+  .cart-img{
+    width: 100px;
+    height: 100px;
+  }
+  
+  

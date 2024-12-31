@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/reg.css">
+    <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+</head>
+<body class="body">
+    <div class="container-fluid">
+        <div class="container-fluid ">
+          
+            <div class="container-fluid">
+              <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+                  <div class="container">
+                      <!-- Logo Section -->
+                      <a class="navbar-brand nav-font  text-dark fw-bold" href="#">
+                          <i class="fa-brands fa-slack text-warning"></i> Echo Stock
+                      </a>
+          
+                      <!-- Toggler Button -->
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                      </button>
+          
+                      <!-- Collapsible Content -->
+                      
+                              
+                      <li><a class="dropdown-item text-warning" href="/signup/"><i class="fa-solid fa-sign-out me-2"></i>Sign Up</a></li>
+          
+                              
+              </nav>
+    </div>
+          
+<div class="container px-4 py-5 bg-light" id="featured-3">
+    <div class="row g-4 py-5">
+        <div class="col-md-10 mx-auto col-lg-5">
+            <h2 class="pb-2 text-center mb-3">Sign In</h2>
+            {% set message = get_flashed_messages(with_categories=True) %}
+            {% if message %}
+              {% for msg,cat in message %}
+                {% if cat == 'errormsg' %}
+                <div class="alert alert-danger">{{msg}}</div>
+                {% else %}
+                <div class="alert alert-success">{{msg}}</div>
+                {% endif %}
+
+              {% endfor %}
+            {% endif %}
+
+            {% if loginform.email.errors %}
+              <div class="alert alert-danger">{{ loginform.email.errors }}</div>
+            {% endif %}
+
+            {% if loginform.password.errors %}
+              <div class="alert alert-danger">{{ loginform.password.errors }}</div>
+            {% endif %}
+
+            <form method="post" novalidate action="{{ url_for ('user_login') }}" class="p-4 p-md-5 border rounded-3 bg-body-tertiary ">
+              <div class="form-floating mb-3">
+                {{ loginform.email(class="form-control",placeholder="name@example.com") }}
+                
+                {{ loginform.email.label }}
+               
+              </div>
+              <div class="form-floating mb-3">
+                {{ loginform.password(class="form-control",placeholder="Password") }}
+                
+                {{ loginform.password.label }}
+                
+              </div>
+              {{ loginform.csrf_token }}
+              {{ loginform.submit(class="w-100 btn btn-lg btn-danger noround") }}
+              
+              <hr class="my-4">
+              <a href="/register/" class="text-body-secondary">Don't have an account? Sign Up</a>
+            </form>
+          </div>
+    
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyify | Profile</title>
+    <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body class="back">
+  <!-- Navbar section -->
+  <div class="container-fluid">
+    <div class="container-fluid ">
+      
+        <div class="container-fluid">
+          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+            <div class="container">
+                <!-- Logo Section -->
+                <a class="navbar-brand nav-font text-dark fw-bold" href="/">
+                    <i class="fa-brands fa-slack text-warning"></i> Echo Stock
+                </a>
+        
+                <!-- Toggler Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <!-- Collapsible Content -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Centered Search Bar -->
+                    <form class="d-flex mx-auto w-50" role="search" action="/search" method="GET">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-warning text-white" type="submit">Search</button>
+                    </form>
+        
+                    <!-- Navigation Items -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Account Dropdown -->
+                        <li class="nav-item dropdown">
+                            {% if cus_deets %}
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i> Hi, {{ cus_deets.fname }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="/profile/{{cus_deets.id}}/">
+                                            <i class="fa-solid fa-user me-2"></i>Profile
+                                        </a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-truck-fast me-2"></i>Orders</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item text-warning" href="/logout/">
+                                            <i class="fa-solid fa-sign-out me-2"></i>Sign Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            {% else %}
+                                <a class="nav-link text-dark" href="/login/">
+                                    <i class="fa-regular fa-user"></i> Sign In
+                                </a>
+                            {% endif %}
+                        </li>
+        
+                        <!-- Help Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="helpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-question"></i> Help
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="helpDropdown">
+                                <li><a class="dropdown-item" href="#">Help Center</a></li>
+                                <li><a class="dropdown-item" href="#">Payment Option</a></li>
+                                <li><a class="dropdown-item" href="#">Place Order</a></li>
+                                <li><a class="dropdown-item" href="#">Track Order</a></li>
+                                <li><a class="dropdown-item" href="#">Cancel Order</a></li>
+                                <li><a class="dropdown-item" href="#">Return & Refund</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-warning" href="#"><i class="fa-brands fa-rocketchat me-2"></i>Live Chat</a></li>
+                            </ul>
+                        </li>
+        
+                        <!-- Cart Icon -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/cart">
+                                <i class="fa-solid fa-cart-shopping"></i> Cart
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+      </div>
+      
+      
+    </div>
+       
+</div> 
+    <!-- end of first navbar -->
+
+
+    <div class="container cran">
+      <div class="row  ">
+        <div class="col-md-4">
+          <h2>Welcome {{cus_deets.fname}}</h2>
+        </div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              <h1>Profile Page</h1>
+            </div>
+            <div class="card-body">
+            <h4>First Name </h4>
+            <h2>{{ cus_deets.fname }}</h2><br>
+              <h4>Last Name</h4>
+            <h2>{{ cus_deets.lname }}</h2><br>
+            <h4>Email</h4>
+            <p>{{cus_deets.email}}</p><br>
+            <h4>Address</h4>
+            <p>{{cus_deets.address}}</p><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   {# <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="mt-4">Update your profile </h2>
+          <form action="/profile/{{ cus_deets.id }}/update/" method="post" class="mt-3" enctype="multipart/form-data">
+             {{ form.hidden_tag() }}
+              <div class="mb-2">
+                  <label for="">First Name</label><br>
+                  <input type="text" name="fname" id="" value="{{ cus_deets.fname }}" placeholder="First Name" class="form-control">
+              </div>
+              <div class="mb-2">
+                  <label for="">Last Name</label><br>
+                  <input type="text" name="lname" id="" value="{{ cus_deets.lname }}" placeholder="Last Name" class="form-control">
+              </div>
+              <div class="mb-2">
+                  <label for="">Business Email</label><br>
+                  <input type="text" name="email" id="" value="{{ cus_deets.email}}"  placeholder="Email" class="form-control">
+              </div>
+              
+            <div class="mb-2">
+              <label for="">Address</label><br>
+              <input type="text" name="address" id="" value="{{ cus_deets.address}}"  placeholder="Address" class="form-control">
+          </div>
+              <div class="mb-2">
+                  <button class="btn btn-success col-12" href>Update</button>
+              </div>
+          </form>
+        </div>
+      </div>
+      </div>
+      <div class="col-md-6"></div>
+#}
+
+
+
+
+    <footer class="foot">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 ben p-3">
+            <i class="fa-brands fa-slack lg text-warning"></i><span class="text-white">Echo</span>
+          </div>
+          <div class="col-md-4 p-3">
+            <p class="text-white">Subscribe to our newsletter to get updates on our latest offers!</p>
+            <form class="d-flex " role="search">
+              <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-warning" type="submit">Search</button>
+            </form>
+          </div>
+          <div class="col-md-4 p-3 text-center text-white">
+            <i class="fa-solid fa-envelope m-3"></i><span>Email Support</span>
+            <p>help@Echostock.com</p>
+            <i class="fa-solid fa-phone m-3"></i><span>Phone Support</span>
+            <p>08074367382 , 07026665578</p>
+            <i class="fa-brands fa-whatsapp m-3"></i><span>Whatsapp</span>
+            <p>09060799235, 08065728282</p>
+          </div>
+        </div>
+      </div>
+      <div class="nbg">
+        <div class="container p-4">
+          <div class="row">
+           
+            <div class="col-md-3 text-white foot">
+              <h6>ABOUT ECHO</h6>
+              <li> <a href="">About us</a></li>
+                 <li> <a href="">careers</a></li>
+                <li> <a href="">Jumia Express</a></li> 
+                <li> <a href="">Terms and Conditions</a></li>
+                <li> <a href="">Privacy Notice</a></li> 
+                 <li>  <a href="">Payment Information Guidelines</a></li>
+                <li> <a href="">Cookie Notice</a></li>
+                <li> <a href="">Official Stores</a></li> 
+                <li> <a href="">Flash Sales</a></li>
+              
+            </div> 
+            <div class="col-md-3 text-white foot">
+              <h6>NEED HELP?</h6>
+              <li><a href="">Chat with us</a></li>  <li><a href="">Help center</a> </li> <li><a href="">Contact Us</a></li>
+              
+            </div>
+            <div class="col-md-3 text-white foot">
+              <h6>MAKE MONEY WITH ECHO</h6>
+             
+              <li><a href="">Sell on Echo</a> </li>
+                <li><a href="">Vendor hub</a> </li>
+                <li><a href="">a Sales Consultant</a> </li>
+            
+            </div>
+            <div class="col-md-3 text-white foot">
+              <h6>BUYING ON ECHO</h6>
+              
+                <li><a href="">Buyer Safety Center</a></li> 
+                 <li> <a href="">FAQs</a></li>
+                <li><a href="">Delivery</a> </li>
+                <li><a href="">Echo Return policy</a> </li>
+                <li><a href="">Digital Service</a> </li>
+                <li><a href="">Bulk Purchase</a></li>
+              
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center text-white">
+              <h5>PAYMENT METHOD & DELIVERY METHOD</h5>
+              <div class="m-auto text-lg bro">
+                <i class="fa-brands fa-cc-visa ml-3"></i>
+                <i class="fa-brands fa-cc-mastercard ml-3"></i>
+                <i class="fa-brands fa-paypal ml-3"></i>
+                <i class="fa-brands fa-dhl ml-3 dhl"></i>
+              </div>
+              
+
+            </div>
+        </div>
+        <div class="container text-secondary text-center">
+          <hr>
+          <p >Copyright c 2024 Echostock.com. All right reserved</p>
+        </div>
+
+      </div>
+    </footer>
+
+        
+     
+
+
+
+
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
