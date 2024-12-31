@@ -120,21 +120,25 @@
                 <div class="card card-big">
                     <div class="card-body d-flex ">
                       {% for product in products %}
-                      <div class="col-6 col-md-4 col-lg-3 m-3">
-                        <div class="card caer shadow h-100 ">
-                            <a href=""><img src="{{ url_for('static', filename='media/' + product.pro_picture) }}" class="card-img-top img-fluid image" alt="Samsung Galaxy"></a>
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">{{ product.pro_name }}</h5>
-                                <strike class="card-text text-body-secondary">Old_Price: {{ product.old_price }}</strike>
-                                <b class="card-text">New_Price: {{ product.new_price }}</b>
-                                {% set in_cart = product.prod_id in cart_items | map(attribute='prod_id') %}
-                                <button type="button" class="btn btn-warning rounded-4 px-3 mt-3 do" data-id="{{ product.prod_id }}">
-                                  <i class="fa fa-cart-plus fs-6 me-2"></i>
-                                  Add to cart
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                      <form action="/cart/add/" method="get">
+                        <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <div class="col-6 col-md-4 col-lg-3 m-3">
+                          <div class="card caer shadow h-100 ">
+                              <a href=""><img src="{{ url_for('static', filename='media/' + product.pro_picture) }}" class="card-img-top img-fluid image" alt="Samsung Galaxy"></a>
+                              <div class="card-body">
+                                  <h5 class="card-title text-truncate">{{ product.pro_name }}</h5>
+                                  <strike class="card-text text-body-secondary">Old_Price: {{ product.old_price }}</strike>
+                                  <b class="card-text">New_Price: {{ product.new_price }}</b>
+                                  {% set in_cart = product.prod_id in cart_items | map(attribute='prod_id') %}
+                                  <a  class="btn btn-warning rounded-4 px-3 mt-3 do" href="/cart/add/">
+                                    <i class="fa fa-cart-plus fs-6 me-2"></i>
+                                    Add to cart
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                      </form>
                     {% endfor %}
                     </div>
                 </div>

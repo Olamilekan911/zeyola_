@@ -1,11 +1,28 @@
 import requests,json,random,os,secrets
 from flask import render_template,request,redirect,flash,session,url_for
 from flask_login import login_required, login_user, logout_user, current_user
+from flask_wtf.csrf import CSRFProtect,CSRFError
 from werkzeug.security import generate_password_hash,check_password_hash
 from werkzeug.utils import secure_filename
 from pkg import app
 from pkg.models import Customer,Product,Cart,State,Lga,db,Payment,Category,Admin
 from pkg.forms import LoginForm
+
+
+csrf = CSRFProtect(app)
+
+
+@app.after_request
+def after_request(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
+
+
+@app.errorhandler(CSRFError)
+def handle_csrf(e):
+    return render_template('user/csrf_error.html', reason=e.description)
+
+
 
 @app.route('/')
 def home():
@@ -90,27 +107,160 @@ def profile():
 
 @app.route('/cart/', methods=['GET'])
 def get_cart():
-    cus_id = session['cus_loggedin'] 
-    if cus_id:
-        cus_deets = db.session.query(Customer).get(cus_id)
-        cart = db.session.query(Cart).filter_by(cus_id=cus_id).all()
-    for item in cart:
-        product = db.session.query(Product).filter_by(product_id=item.product_id).first()
-        if product:
-            cart.append({
-                'pro_id': item.product_id,
-                'pro_picture': product.pro_picture,
-                'cart_id': item.cart_id,
-                'product_name': product.pro_name,
-                'quantity': item.cart_quantity,
-                'new_price': float(product.new_price),
-                'total_price': float(item.cart_quantity * product.new_price)
-            })
-        return render_template('user/cart.html',cus_deets=cus_deets, cart=cart)
+    cus_id = session.get('cus_loggedin')  # Get customer ID from the session
 
+    if cus_id:
+        # Fetch customer details
+        cus_deets = db.session.query(Customer).filter(Customer.id == cus_id).first()
+
+        # Fetch cart items for the logged-in customer
+        cart_items = []
+        cart = db.session.query(Cart).filter_by(cus_id=cus_id).all()
+        for item in cart:
+            product = db.session.query(Product).filter_by(product_id=item.product_id).first()
+            if product:
+                cart_items.append({
+                    'pro_id': item.product_id,
+                    'pro_picture': product.pro_picture,
+                    'cart_id': item.cart_id,
+                    'product_name': product.pro_name,
+                    'quantity': item.cart_quantity,
+                    'new_price': float(product.new_price),
+                    'total_price': float(item.cart_quantity * product.new_price)
+                })
+
+        # Render the cart page with customer and cart details
+        return render_template('user/cart.html', cus_deets=cus_deets, cart_items=cart_items)
     else:
-        flash ('errormsg', 'You must be logged in')
+        flash('errormsg', 'You must be logged in')
         return redirect('/login/')
+    
+
+
+
+# @app.route('/cart/add/', methods=['GET','POST'])
+# def add_to_cart():
+#     if 'cus_loggedin' not in session:
+#         flash('Please log in to add items to your cart.', 'error')
+#         return redirect(url_for('user_login'))
+
+#     # Get data from the form
+#     pro_id = request.form.get('pro_id', type=int)
+#     quantity = request.form.get('quantity', type=int)
+
+#     # Validate product and quantity
+#     if not pro_id or quantity <= 0:
+#         flash('Invalid product or quantity!', 'error')
+#         return redirect(url_for('home'))
+
+#     cus_id = session['cus_loggedin']
+
+#     # Check if the product exists
+#     product = db.session.query(Product).filter_by(prod_id=pro_id).first()
+#     if not product:
+#         flash('Product not found.', 'error')
+#         return redirect(url_for('home'))
+
+#     # Check if the product is already in the cart
+#     cart_item = db.session.query(Cart).filter_by(pro_id=pro_id, cus_id=cus_id).first()
+#     if cart_item:
+#         # Update quantity if already in cart
+#         cart_item.cart_quantity = quantity
+#         flash('Cart updated successfully!', 'success')
+#     else:
+#         # Add new product to cart
+#         new_cart_item = Cart(pro_id=pro_id, cart_quantity=quantity, cus_id=cus_id)
+#         db.session.add(new_cart_item)
+#         flash('Item added to cart!', 'success')
+
+#     db.session.commit()
+#     return redirect(url_for('get_cart'))
+
+# @app.route('/cart/update/<int:cart_id>/', methods=['POST'])
+# def update_cart(cart_id):
+#     cus_id = session.get('cus_loggedin')  # Ensure the user is logged in
+#     if not cus_id:
+#         flash('errormsg', 'You must be logged in to update items in the cart.')
+#         return redirect('/login/')
+
+#     quantity = request.form.get('quantity', type=int)
+#     if not quantity or quantity <= 0:
+#         flash('errormsg', 'Invalid quantity.')
+#         return redirect('/cart/')
+
+#     # Find the cart item
+#     cart_item = db.session.query(Cart).filter_by(cart_id=cart_id, cus_id=cus_id).first()
+#     if not cart_item:
+#         flash('errormsg', 'Cart item not found.')
+#         return redirect('/cart/')
+
+#     # Update quantity
+#     cart_item.cart_quantity = quantity
+#     db.session.commit()
+#     flash('successmsg', 'Cart updated successfully.')
+#     return redirect('/cart/')
+
+
+# @app.route('/cart/remove/<int:cart_id>/', methods=['POST'])
+# def remove_from_cart(cart_id):
+#     cus_id = session.get('cus_loggedin')  # Ensure the user is logged in
+#     if not cus_id:
+#         flash('errormsg', 'You must be logged in to remove items from the cart.')
+#         return redirect('/login/')
+
+#     # Find the cart item
+#     cart_item = db.session.query(Cart).filter_by(cart_id=cart_id, cus_id=cus_id).first()
+#     if not cart_item:
+#         flash('errormsg', 'Cart item not found.')
+#         return redirect('/cart/')
+
+#     # Remove the cart item
+#     db.session.delete(cart_item)
+#     db.session.commit()
+#     flash('successmsg', 'Item removed from cart.')
+#     return redirect('/cart/')
+
+
+
+
+
+
+
+@app.route('/cart/add/', methods=['POST'])
+def add_to_cart():
+    if 'cus_loggedin' not in session:
+        flash('You need to log in to add items to the cart!', 'error')
+        return redirect('/login/')
+
+    cus_id = session.get('cus_loggedin')
+    product_id = request.form.get('product_id', type=int)
+    quantity = request.form.get('quantity', type=int)
+
+    if not product_id or quantity <= 0:
+        flash('Invalid product or quantity', 'error')
+        return redirect('/')
+
+    product = db.session.query(Product).filter_by(product_id=product_id).first()
+    if not product:
+        flash('Product not found.', 'error')
+        return redirect('/')
+
+    existing_cart_item = db.session.query(Cart).filter_by(product_id=product_id, cus_id=cus_id).first()
+
+    if existing_cart_item:
+        existing_cart_item.cart_quantity += quantity
+        flash('Cart updated successfully!', 'success')
+    else:
+        new_cart_item = Cart(
+            product_id=product_id,
+            cart_quantity=quantity,
+            cus_id=cus_id
+        )
+        db.session.add(new_cart_item)
+        flash('Item added to cart!', 'success')
+
+    db.session.commit()
+    return redirect('/cart/')
 
 
 
@@ -187,7 +337,7 @@ def gadget():
 
     if cus_id:
         cus_deets = db.session.query(Customer).get(cus_id)
-        category = db.session.query(Category).filter_by(category_name="Fashion").first()
+        category = db.session.query(Category).filter_by(category_name="Computer & Gadget").first()
         products = []
         if category:
             products = db.session.query(Product).filter(Product.pro_category_id == category.category_id).all()
