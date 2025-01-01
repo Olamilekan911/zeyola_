@@ -104,22 +104,18 @@
         {% if cart_items %}
         <h2 class="mb-4">Your Shopping Cart</h2>
         <div class="row">
+            
             {% for item in cart_items %}
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ item.product.pro_picture }}" class="card-img-top" alt="{{ item.product.pro_name }}">
+                    <img src="{{ url_for('static', filename='media/' + item.pro_picture) }}" class="card-img-top" alt="{{ item.product_name }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.product.pro_name }}</h5>
-                        <p class="card-text">Price: ${{ item.product.new_price }}</p>
-                        <p class="card-text">Quantity: {{ item.cart_quantity }}</p>
-                        <p class="card-text">Total: ${{ item.cart_quantity * item.product.new_price }}</p>
+                        <h5 class="card-title">{{ item.product_name }}</h5>
+                        <p class="card-text">Price: ${{ item.new_price }}</p>
+                        <p class="card-text">Quantity: {{ item.quantity }}</p>
+                        <p class="card-text">Total: ${{ item.quantity * item.new_price }}</p>
                         <div class="d-flex justify-content-between">
-                            <form action="{{ url_for('increase_quantity', cart_id=item.cart_id) }}" method="POST">
-                                <button class="btn btn-sm btn-success">+</button>
-                            </form>
-                            <form action="{{ url_for('decrease_quantity', cart_id=item.cart_id) }}" method="POST">
-                                <button class="btn btn-sm btn-danger">-</button>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>

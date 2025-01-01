@@ -9,7 +9,7 @@ from pkg.models import db,Customer
 
 
 
-csrf =CSRFProtect()
+# csrf =CSRFProtect()
 # mail = Mail()
 
 
@@ -26,7 +26,7 @@ def create_app():
     #db = SQLAlchemy(app)
     db.init_app(app)
     migrate = Migrate(app,db)
-    csrf.init_app(app)
+    # csrf.init_app(app)
 
 
 

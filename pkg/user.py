@@ -105,9 +105,12 @@ def get_cart():
         # Fetch cart items for the logged-in customer
         cart_items = []
         cart = db.session.query(Cart).filter_by(cus_id=cus_id).all()
+        total_price = 0
         for item in cart:
             product = db.session.query(Product).filter_by(product_id=item.product_id).first()
             if product:
+                total_price += product.new_price 
+                print(product.pro_picture)
                 cart_items.append({
                     'pro_id': item.product_id,
                     'pro_picture': product.pro_picture,
@@ -119,7 +122,7 @@ def get_cart():
                 })
 
         # Render the cart page with customer and cart details
-        return render_template('user/cart.html', cus_deets=cus_deets, cart_items=cart_items)
+        return render_template('user/cart.html', cus_deets=cus_deets, cart_items=cart_items, total_price=total_price)
     else:
         flash('errormsg', 'You must be logged in')
         return redirect('/login/')
@@ -221,18 +224,19 @@ def add_to_cart():
         return jsonify({'status': 'error', 'message': 'You need to log in to add items to the cart!'}), 401
 
     cus_id = session.get('cus_loggedin')
-    
+    print(request.form)
     # Parse JSON data from the request
     try:
-        data = request.get_json()
-        product_id = data.get('product_id', type=int)
-        quantity = data.get('quantity', type=int)
+
+        product_id =request.form.get('product_id', type=int)
+       
     except:
         return jsonify({'status': 'error', 'message': 'Invalid request data'}), 400
 
-    if not product_id or not quantity or quantity <= 0:
+    if not product_id  :
+       
         return jsonify({'status': 'error', 'message': 'Invalid product or quantity'}), 400
-
+    
     product = db.session.query(Product).filter_by(product_id=product_id).first()
     if not product:
         return jsonify({'status': 'error', 'message': 'Product not found'}), 404
@@ -240,12 +244,12 @@ def add_to_cart():
     existing_cart_item = db.session.query(Cart).filter_by(product_id=product_id, cus_id=cus_id).first()
 
     if existing_cart_item:
-        existing_cart_item.cart_quantity += quantity
+        existing_cart_item.cart_quantity += 1
         message = 'Cart updated successfully!'
     else:
         new_cart_item = Cart(
             product_id=product_id,
-            cart_quantity=quantity,
+            cart_quantity=1,
             cus_id=cus_id
         )
         db.session.add(new_cart_item)
