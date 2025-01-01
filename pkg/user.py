@@ -1,5 +1,5 @@
 import requests,json,random,os,secrets
-from flask import render_template,request,redirect,flash,session,url_for
+from flask import render_template,request,redirect,flash,session,url_for,jsonify
 from flask_login import login_required, login_user, logout_user, current_user
 from flask_wtf.csrf import CSRFProtect,CSRFError
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -9,18 +9,7 @@ from pkg.models import Customer,Product,Cart,State,Lga,db,Payment,Category,Admin
 from pkg.forms import LoginForm
 
 
-csrf = CSRFProtect(app)
 
-
-@app.after_request
-def after_request(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    return response
-
-
-@app.errorhandler(CSRFError)
-def handle_csrf(e):
-    return render_template('user/csrf_error.html', reason=e.description)
 
 
 
@@ -229,27 +218,30 @@ def get_cart():
 @app.route('/cart/add/', methods=['POST'])
 def add_to_cart():
     if 'cus_loggedin' not in session:
-        flash('You need to log in to add items to the cart!', 'error')
-        return redirect('/login/')
+        return jsonify({'status': 'error', 'message': 'You need to log in to add items to the cart!'}), 401
 
     cus_id = session.get('cus_loggedin')
-    product_id = request.form.get('product_id', type=int)
-    quantity = request.form.get('quantity', type=int)
+    
+    # Parse JSON data from the request
+    try:
+        data = request.get_json()
+        product_id = data.get('product_id', type=int)
+        quantity = data.get('quantity', type=int)
+    except:
+        return jsonify({'status': 'error', 'message': 'Invalid request data'}), 400
 
-    if not product_id or quantity <= 0:
-        flash('Invalid product or quantity', 'error')
-        return redirect('/')
+    if not product_id or not quantity or quantity <= 0:
+        return jsonify({'status': 'error', 'message': 'Invalid product or quantity'}), 400
 
     product = db.session.query(Product).filter_by(product_id=product_id).first()
     if not product:
-        flash('Product not found.', 'error')
-        return redirect('/')
+        return jsonify({'status': 'error', 'message': 'Product not found'}), 404
 
     existing_cart_item = db.session.query(Cart).filter_by(product_id=product_id, cus_id=cus_id).first()
 
     if existing_cart_item:
         existing_cart_item.cart_quantity += quantity
-        flash('Cart updated successfully!', 'success')
+        message = 'Cart updated successfully!'
     else:
         new_cart_item = Cart(
             product_id=product_id,
@@ -257,10 +249,11 @@ def add_to_cart():
             cus_id=cus_id
         )
         db.session.add(new_cart_item)
-        flash('Item added to cart!', 'success')
+        message = 'Item added to cart!'
 
     db.session.commit()
-    return redirect('/cart/')
+    return jsonify({'status': 'success', 'message': message}), 200
+
 
 
 

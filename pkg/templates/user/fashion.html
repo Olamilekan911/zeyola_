@@ -120,9 +120,6 @@
                 <div class="card card-big">
                     <div class="card-body d-flex ">
                       {% for product in products %}
-                      <form action="/cart/add/" method="get">
-                        <input type="hidden" name="product_id" value="{{ product.product_id }}">
-                        <input type="hidden" name="quantity" value="1">
                         <div class="col-6 col-md-4 col-lg-3 m-3">
                           <div class="card caer shadow h-100 ">
                               <a href=""><img src="{{ url_for('static', filename='media/' + product.pro_picture) }}" class="card-img-top img-fluid image" alt="Samsung Galaxy"></a>
@@ -130,15 +127,14 @@
                                   <h5 class="card-title text-truncate">{{ product.pro_name }}</h5>
                                   <strike class="card-text text-body-secondary">Old_Price: {{ product.old_price }}</strike>
                                   <b class="card-text">New_Price: {{ product.new_price }}</b>
-                                  {% set in_cart = product.prod_id in cart_items | map(attribute='prod_id') %}
-                                  <a  class="btn btn-warning rounded-4 px-3 mt-3 do" href="/cart/add/">
+                                  {% set in_cart = product.product_id in cart_items | map(attribute='product_id') %}
+                                  <button  class="btn btn-warning rounded-4 px-3 mt-3 do" data-product-id="{{ product.product_id }}" >
                                     <i class="fa fa-cart-plus fs-6 me-2"></i>
                                     Add to cart
-                                  </a>
+                                  </button>
                               </div>
                           </div>
-                      </div>
-                      </form>
+                      
                     {% endfor %}
                     </div>
                 </div>
@@ -238,19 +234,32 @@
   </footer>
  
 <script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+<script src="/static/js/jquery-3.7.1.min.js"></script>
 <script>
-    $(document).ready(function(){
-        var cartCount = 0;
-        $(".do").each(function () {
-            $(this).click(function () {
-                cartCount++;
-                $("#change-num").text(cartCount);
-                $("#change-num").removeClass("bg-danger").addClass('bg-success');
-            });
-        });
-    });
+  $(document).ready(function() {
+      var cartCount = 0;
+      $(".do").each(function () {
+          $(this).click(function () {
+              // Assuming each button has a data attribute 'product-id'
+              var productId = $(this).data("product-id");
+              
+              // Send the POST request
+              $.post("/cart/add/", { product_id: productId })
+                  .done(function(response) {
+                      // Assuming success response
+                      cartCount++;
+                      $("#change-num").text(cartCount);
+                      $("#change-num").removeClass("bg-danger").addClass("bg-success");
+                  })
+                  .fail(function(error) {
+                      // Handle error response
+                      console.error("Error adding to cart:", error);
+                  });
+          });
+      });
+  });
 </script>
+
 
 </body>
 
