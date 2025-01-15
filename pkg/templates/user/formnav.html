@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyify{% block title %} {% endblock %} </title>
+    <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/reg.css">
+</head>
+<body class="bg-body-tertiary">
+  <!-- Navbar section -->
+  <div class="container-fluid">
+
+    <!-- Top Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <!-- Logo Section -->
+            <a class="navbar-brand nav-font text-dark fw-bold" href="/">
+                <i class="fa-brands fa-affiliatetheme text-warning"></i> Zeyola
+            </a>
+    
+            <!-- Toggler Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="d-flex align-items-center ms-auto">
+                    <a class="nav-link text-dark " href="/register/">
+                        <i class="fa-regular fa-user"></i> Sign Up
+                    </a>
+                </div>
+                            
+                    
+    
+                    
+                
+            </div>
+        </div>
+    </nav>
+    
+
+    
+    
+</div>
+
+    <!-- end of first navbar -->
+
+    
+    {% set message = get_flashed_messages(with_categories=True) %}
+    {% if message %}
+      {% for msg,cat in message %}
+        {% if cat == 'errormsg' %}
+        <div class="alert alert-danger">{{msg}}</div>
+        {% else %}
+        <div class="alert alert-success">{{msg}}</div>
+        {% endif %}
+
+      {% endfor %}
+    {% endif %}
+
+
+
+    {% block body %}
+
+    {% endblock %}
+
+
+</body>
+</html>

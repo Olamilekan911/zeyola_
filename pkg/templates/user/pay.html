@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            color: #555;
+            margin: 5px 0;
+        }
+        .highlight {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .btn-danger {
+            background-color: #d9534f;
+        }
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+        }
+        .details p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+     
+    {% for message in get_flashed_messages() %}
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    <div class="container">
+        <!-- Title Section -->
+        <h1>Payment for Your Order</h1>
+        <p>Please review your details below before proceeding to payment.</p>
+
+        <!-- Details Section -->
+        <div class="details">
+            <p><strong>Name:</strong> {{ cus_deets.fname }} {{ cus_deets.lname }}</p>
+            <p><strong>Amount:</strong> &#8358;{{ "{:,.2f}".format(total_price) }}</p>
+            <p><strong>Quantity:</strong>{{ total_quantity }}</p>
+            <p><strong>Email:</strong> {{ cus_deets.email }}</p>
+            <p><strong>Order Reference:</strong> <span class="highlight">{{ trxdeets.order_reference }}</span></p>
+            <p><small class="text-muted">Keep your order reference handy for future inquiries.</small></p>
+        </div>
+
+        <!-- Form Section -->
+        <form action="/pay/" method="POST">
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Cancel</button>
+                <button type="submit" class="btn btn-danger">Confirm Payment</button>
+            </div>
+        </form>
+
+        <!-- Note Section -->
+        <div class="note">
+            <p>By confirming your payment, you agree to our <a href="/terms">Terms & Conditions</a>.</p>
+        </div>
+    </div>
+
+    
+</body>
+</html>

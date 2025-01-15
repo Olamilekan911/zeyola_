@@ -7,6 +7,51 @@
 .beat{
     background-color: white;
 }
+.sect{
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+.image-sect{
+  width: 100%;
+  height: 350px;
+}
+.star{
+  color: orange;
+
+}
+.bord{
+  border: none;
+}
+.large{
+  font-size: 25px;
+}
+.but{
+  color: white;
+  background-color: orange;
+  font-size: 18px;
+  font-weight: 600;
+}
+.small-img-row{
+  display: flex;
+  justify-content: space-between;
+
+}
+.small-img-col{
+  flex-basis: 24%;
+  cursor: pointer;
+}
+.msg{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 120px;
+  color: rgb(228, 157, 26);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.don{
+  justify-content: space-evenly;
+}
 .maz{
   margin-top: 60px;
 }
@@ -40,7 +85,7 @@
   font-size: 20px;
   font-weight: bolder;
 }
-.phone{
+.ph{
   background-color: rgb(0, 7, 0);
   color: white;
   font-size: 20px;
@@ -53,19 +98,19 @@
   font-size: 20px;
   font-weight: bolder;
 }
-.beauty{
+.bea{
   background-color: rgb(24, 24, 1);
   color: white;
   font-size: 20px;
   font-weight: bolder;
 }
-.gadget{
+.gad{
   background-color: rgb(0, 10, 10);
   color: white;
   font-size: 20px;
   font-weight: bolder;
 }
-.super{
+.sup{
   background-color: rgb(17, 11, 1);
   color: white;
   font-size: 20px;
@@ -194,6 +239,10 @@ font-size: 50px;
 }
 .nbg{
 background-color: #222;
+align-items: center;
+display: flex;
+justify-content: center;
+padding: 20px;
 }
 .bro{
 font-size: 20px;
@@ -232,5 +281,103 @@ text-decoration: none;
 
 .foot li a:hover {
 text-decoration: underline;
+}
+
+.ban{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/male-banner.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.beauty{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/beauty.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.super{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/sup.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.phone{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/phine.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.gadget{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/gadget.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.app{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/elect.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.card-big{
+  min-height: 180px;
+  padding: 15px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.btn-gray{
+  background-color: rgb(250, 164, 5);
+  color: white;
+}
+.pad{
+  margin-top: 30px;
+}
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
 }
 

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyify </title>
+    <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body class="back">
+  <!-- Navbar section -->
+  <div class="container-fluid">
+
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand nav-font text-dark fw-bold" href="/">
+                <i class="fa-brands fa-affiliatetheme text-warning"></i> Zeyola
+            </a>
+    
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+              
+                
+                <form class="d-flex mx-auto w-50" role="search" action="/search/">
+                    <input class="form-control me-2 shadow" type="search" name="query" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-warning text-white shadow" type="submit">Search</button>
+                </form>
+
+    
+                
+                <ul class="navbar-nav ms-auto">
+                    
+                    <li class="nav-item dropdown">
+                        {% if cus_deets %}
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-user"></i> Hi, {{ cus_deets.fname }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="/profile/">
+                                        <i class="fa-solid fa-user me-2"></i>Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/orders/">
+                                        <i class="fa-solid fa-truck-fast me-2"></i> Order
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-warning" href="/logout/">
+                                        <i class="fa-solid fa-sign-out me-2"></i>Sign Out
+                                    </a>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <a class="nav-link text-dark btn btn-warning" href="/login/">
+                                <i class="fa-regular fa-user"></i> Sign In
+                            </a>
+                        {% endif %}
+                    </li>
+    
+        
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="helpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-question"></i> Help
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="helpDropdown">
+                            <li><a class="dropdown-item" href="#">Help Center</a></li>
+                            <li><a class="dropdown-item" href="#">Payment Option</a></li>
+                            <li><a class="dropdown-item" href="#">Place Order</a></li>
+                            <li><a class="dropdown-item" href="#">Track Order</a></li>
+                            <li><a class="dropdown-item" href="#">Cancel Order</a></li>
+                            <li><a class="dropdown-item" href="#">Return & Refund</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-warning" href="#"><i class="fa-brands fa-rocketchat me-2"></i>Live Chat</a></li>
+                        </ul>
+                    </li>
+
+
+                   
+                        
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link text-grey position-relative" href="/cart/">
+                            <!-- Cart Icon -->
+                            <i class="fa-solid fa-cart-shopping me-1" style="font-size: 1.2rem;"></i>
+                            <!-- Cart Badge -->
+                            <span 
+                                id="cart-badge" 
+                                class="badge position-absolute top-3 start-10 translate-middle text-warning" 
+                                style="font-size: 1rem; min-width: 20px; min-height: 20px; background-color: transparent;">
+                                {{ cart_count }}
+                            </span>
+                        </a>
+                    </li>
+                    
+                        
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    
+    
+</div>
+
+    <!-- end of first navbar -->
+
+    
+   
+
+
+    {% block body %}
+
+    {% endblock %}
+
+    <footer class="foot ">
+        <div class="container">
+          <div class="row mt-5">
+            <div class="col-md-4 ben p-3">
+                <i class="fa-brands fa-affiliatetheme text-warning"></i><span class="text-white">Zeyola</span>
+            </div>
+            <div class="col-md-4 p-3">
+              <p class="text-white">Subscribe to our newsletter to get updates on our latest offers!</p>
+              <form class="d-flex " role="search">
+                <input class="form-control me-2 " type="search" placeholder="Newsletter" aria-label="Search">
+                <button class="btn btn-outline-warning" type="submit">Subscribe</button>
+              </form>
+            </div>
+            <div class="col-md-4 p-3 text-center text-white">
+              <i class="fa-solid fa-envelope m-3"></i><span>Email Support</span>
+              <p>help@Zeyola.com</p>
+              <i class="fa-solid fa-phone m-3"></i><span>Phone Support</span>
+              <p>08074367382 , 07026665578</p>
+              <i class="fa-brands fa-whatsapp m-3"></i><span>Whatsapp</span>
+              <p>09060799235, 08065728282</p>
+            </div>
+          </div>
+        </div>
+        <div class="nbg">
+          <div class="container mb-5  ">
+            <div class="row mb-5 p-5">
+             
+              <div class="col-md-3 text-white foot">
+                <h6>ABOUT ZEYOLA</h6>
+                <li> <a href="">About us</a></li>
+                  <li> <a href="">Terms and Conditions</a></li>
+                  <li> <a href="">Privacy Notice</a></li> 
+                   <li>  <a href="">Payment Information Guidelines</a></li>
+                  
+              </div> 
+              <div class="col-md-3 text-white foot">
+                <h6>NEED HELP?</h6>
+                <li><a href="">Chat with us</a></li>  <li><a href="">Help center</a> </li> <li><a href="">Contact Us</a></li>
+                
+              </div>
+
+              <div class="col-md-3 text-white foot">
+                <h6>BUYING ON ZEYOLA</h6>
+                
+                  <li><a href="">Buyer Safety Center</a></li> 
+                   <li> <a href="">FAQs</a></li>
+                  <li><a href="">Delivery</a> </li>
+                  <li><a href="">Zeyola Return policy</a> </li>
+                  
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center text-white">
+                <h5>PAYMENT METHOD & DELIVERY METHOD</h5>
+                <div class="m-auto text-lg bro">
+                  <i class="fa-brands fa-cc-visa ml-3"></i>
+                  <i class="fa-brands fa-cc-mastercard ml-3"></i>
+                  <i class="fa-brands fa-paypal ml-3"></i>
+                  <i class="fa-brands fa-dhl ml-3 dhl"></i>
+                </div>
+                
+  
+              </div>
+          </div>
+          <div class="container text-secondary text-center">
+            <hr>
+            <p >Copyright c 2024 Zeyola.com. All right reserved</p>
+          </div>
+  
+        </div>
+      </footer>
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/static/js/jquery-3.7.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".do").each(function() {
+        $(this).click(function() {
+            var productId = $(this).data("product-id");
+            
+            if (!productId) {
+                console.error("Product ID is missing!");
+                return;
+            }
+
+            // Send the POST request
+            $.ajax({
+                url: "/cart/add/",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ product_id: productId }),
+                success: function(response) {
+                    console.log("Added to cart successfully:", response);
+                    $("#cart-badge").text(response.cart_count);
+                    $("#cart-badge").removeClass("bg-danger").addClass("text-warning");
+                },
+                error: function(error) {
+                    console.error("Error adding to cart:", error);
+                }
+            });
+        });
+    });
+});
+
+  $.getJSON('/cart/', function(response) {
+  if (response.success) {
+    $("#change-num").text(response.cart_count);
+  } else {
+    console.error("Error fetching cart data:", response.message);
+  }
+});
+
+
+  // Handle Cancel Pay button click
+  $("#cancelPay").on("click", function () {
+    $("#total").text("000");
+  });
+
+
+</script>
+</body>
+</html>

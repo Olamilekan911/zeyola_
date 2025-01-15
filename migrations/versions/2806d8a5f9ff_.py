@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 49790dc58102
+Revision ID: 2806d8a5f9ff
 Revises: 
-Create Date: 2024-12-29 12:14:50.953160
+Create Date: 2025-01-05 14:57:56.877473
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '49790dc58102'
+revision = '2806d8a5f9ff'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,29 +41,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
-    op.create_table('product',
-    sa.Column('product_id', sa.Integer(), nullable=False),
-    sa.Column('product_name', sa.String(length=100), nullable=False),
-    sa.Column('current_price', sa.Float(), nullable=False),
-    sa.Column('old_price', sa.Float(), nullable=False),
-    sa.Column('in_stock', sa.Integer(), nullable=False),
-    sa.Column('product_picture', sa.String(length=1000), nullable=False),
-    sa.Column('date_added', sa.DateTime(), nullable=True),
-    sa.PrimaryKeyConstraint('product_id')
-    )
     op.create_table('state',
     sa.Column('state_id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('state_name', sa.String(length=100), nullable=False),
     sa.PrimaryKeyConstraint('state_id')
-    )
-    op.create_table('cart',
-    sa.Column('cart_id', sa.Integer(), nullable=False),
-    sa.Column('cart_quantity', sa.Integer(), nullable=False),
-    sa.Column('customer_id', sa.Integer(), nullable=False),
-    sa.Column('product_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['customer_id'], ['customer.id'], ),
-    sa.ForeignKeyConstraint(['product_id'], ['product.product_id'], ),
-    sa.PrimaryKeyConstraint('cart_id')
     )
     op.create_table('lga',
     sa.Column('lga_id', sa.Integer(), autoincrement=True, nullable=False),
@@ -72,20 +53,47 @@ def upgrade():
     sa.ForeignKeyConstraint(['lga_state'], ['state.state_id'], ),
     sa.PrimaryKeyConstraint('lga_id')
     )
+    op.create_table('product',
+    sa.Column('product_id', sa.Integer(), nullable=False),
+    sa.Column('pro_name', sa.String(length=100), nullable=False),
+    sa.Column('new_price', sa.Float(), nullable=False),
+    sa.Column('old_price', sa.Float(), nullable=False),
+    sa.Column('in_stock', sa.Integer(), nullable=False),
+    sa.Column('pro_desc', sa.Text(), nullable=False),
+    sa.Column('pro_spec', sa.Text(), nullable=False),
+    sa.Column('pro_picture', sa.String(length=1000), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('pro_category_id', sa.Integer(), nullable=False),
+    sa.Column('date_added', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['id'], ['customer.id'], ),
+    sa.ForeignKeyConstraint(['pro_category_id'], ['category.category_id'], ),
+    sa.PrimaryKeyConstraint('product_id')
+    )
+    op.create_table('cart_item',
+    sa.Column('cart_id', sa.Integer(), nullable=False),
+    sa.Column('cart_quantity', sa.Integer(), nullable=False),
+    sa.Column('cus_id', sa.Integer(), nullable=False),
+    sa.Column('product_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['cus_id'], ['customer.id'], ),
+    sa.ForeignKeyConstraint(['product_id'], ['product.product_id'], ),
+    sa.PrimaryKeyConstraint('cart_id')
+    )
     op.create_table('order',
     sa.Column('order_id', sa.Integer(), nullable=False),
     sa.Column('order_quantity', sa.Integer(), nullable=False),
     sa.Column('order_price', sa.Float(), nullable=False),
     sa.Column('order_status', sa.String(length=100), nullable=False),
     sa.Column('payment_id', sa.String(length=1000), nullable=False),
-    sa.Column('customer_id', sa.Integer(), nullable=False),
+    sa.Column('order_reference', sa.String(length=45), nullable=False),
+    sa.Column('cus_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['customer_id'], ['customer.id'], ),
+    sa.ForeignKeyConstraint(['cus_id'], ['customer.id'], ),
     sa.ForeignKeyConstraint(['product_id'], ['product.product_id'], ),
     sa.PrimaryKeyConstraint('order_id')
     )
     op.create_table('payment',
     sa.Column('payment_id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('payment_order_id', sa.Integer(), nullable=False),
     sa.Column('payment_status', sa.Enum('pending', 'paid', 'failed'), server_default='pending', nullable=False),
     sa.Column('payment_custid', sa.Integer(), nullable=False),
     sa.Column('payment_ref', sa.String(length=100), nullable=True),
@@ -93,6 +101,7 @@ def upgrade():
     sa.Column('payment_data', sa.Text(), nullable=True),
     sa.Column('payment_date', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['payment_custid'], ['customer.id'], ),
+    sa.ForeignKeyConstraint(['payment_order_id'], ['order.order_id'], ),
     sa.PrimaryKeyConstraint('payment_id')
     )
     # ### end Alembic commands ###
@@ -102,10 +111,10 @@ def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table('payment')
     op.drop_table('order')
-    op.drop_table('lga')
-    op.drop_table('cart')
-    op.drop_table('state')
+    op.drop_table('cart_item')
     op.drop_table('product')
+    op.drop_table('lga')
+    op.drop_table('state')
     op.drop_table('customer')
     op.drop_table('category')
     op.drop_table('admin')

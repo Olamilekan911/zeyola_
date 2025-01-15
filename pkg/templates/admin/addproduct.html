@@ -1,54 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'admin/header.html' %} 
+{% block body %}
+ 
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+<div class="row">
+    <div class="col-md-5">
+        <div id="addProduct" class="form-section ">
+            <h3>Add Product</h3>
     
-    <div id="addProduct" class="section">
-        <h3>Add Product</h3>
-
-        <form method="POST" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-
-            <div class="form-group">
-                <label for="{{ form.pro_name.id }}">Product Name</label>
-                {{ form.pro_name(class="form-control", id=form.pro_name.id) }}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.pro_category_id.id }}">Category</label>
-                {{ form.pro_category_id(class="form-control", id=form.pro_category_id.id) }}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.in_stock.id }}">Quantity Available</label>
-                {{ form.in_stock(class="form-control", id=form.in_stock.id) }}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.old_price.id }}">Old Price</label>
-                {{ form.old_price(class="form-control", id=form.old_price.id) }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.new_price.id }}">New Price</label>
-                {{ form.new_price(class="form-control", id=form.new_price.id) }}
-            </div>
-
-            <div class="form-group">
-                <label for="{{ form.pro_picture.id }}">Product Picture</label>
-                {{ form.pro_picture(class="form-control", id=form.pro_picture.id) }}
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+            <form method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.pro_name.id }}">Product Name</label>
+                            {{ form.pro_name(class="form-control", id=form.pro_name.id) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.pro_category_id.id }}">Category</label>
+                            {{ form.pro_category_id(class="form-control", id=form.pro_category_id.id) }}
+                        </div>
+            
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="{{ form.in_stock.id }}">Quantity Available</label>
+                    {{ form.in_stock(class="form-control", id=form.in_stock.id) }}
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.old_price.id }}">Old Price</label>
+                            {{ form.old_price(class="form-control", id=form.old_price.id) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.new_price.id }}">New Price</label>
+                            {{ form.new_price(class="form-control", id=form.new_price.id) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.pro_desc.id }}">Product Details</label>
+                    {{ form.pro_desc(class="form-control", id=form.pro_desc.id) }}
+                </div>
+    
+                <div class="form-group">
+                    <label for="{{ form.pro_spec.id }}">Product Specification</label>
+                    {{ form.pro_spec(class="form-control", id=form.pro_spec.id) }}
+                </div>
+    
+                <div class="form-group">
+                    <label for="{{ form.pro_picture.id }}">Product Picture</label>
+                    {{ form.pro_picture(class="form-control", id=form.pro_picture.id) }}
+                </div>
+    
+                <button type="submit" class="btn btn-warning">Submit</button>
+            </form>
+        </div>
     </div>
-
-</body>
-</html>
-
-
-
-
-
+</div>
+    
+    {% endblock %}

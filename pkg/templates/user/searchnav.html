@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyify</title>
+    <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body class="bg-body-tertiary">
+    
+     
+    {% for message in get_flashed_messages() %}
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    <div class="container-fluid">
+
+
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+            <div class="container">
+                
+                <a class="navbar-brand nav-font text-dark fw-bold" href="/">
+                    <i class="fa-brands fa-affiliatetheme text-warning"></i> Zeyola
+                </a>
+
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    
+                    <form class="d-flex ms-auto w-20" role="search" action="/search/">
+                        <input class="form-control me-2 shadow" type="search" name="query" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-warning text-white shadow" type="submit">Search</button>
+                    </form>
+
+                    
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+
+     
+    <div class="container-fluid back">
+    </div>
+
+   
+
+    {% block body %}
+    {% endblock %}
+    <footer class="foot ">
+        <div class="container">
+          <div class="row mt-5">
+            <div class="col-md-4 ben p-3">
+                <i class="fa-brands fa-affiliatetheme text-warning"></i><span class="text-white">Zeyola</span>
+            </div>
+            <div class="col-md-4 p-3">
+              <p class="text-white">Subscribe to our newsletter to get updates on our latest offers!</p>
+              <form class="d-flex " role="search">
+                <input class="form-control me-2 " type="search" placeholder="Newsletter" aria-label="Search">
+                <button class="btn btn-outline-warning" type="submit">Subscribe</button>
+              </form>
+            </div>
+            <div class="col-md-4 p-3 text-center text-white">
+              <i class="fa-solid fa-envelope m-3"></i><span>Email Support</span>
+              <p>help@Zeyola.com</p>
+              <i class="fa-solid fa-phone m-3"></i><span>Phone Support</span>
+              <p>08074367382 , 07026665578</p>
+              <i class="fa-brands fa-whatsapp m-3"></i><span>Whatsapp</span>
+              <p>09060799235, 08065728282</p>
+            </div>
+          </div>
+        </div>
+        <div class="nbg">
+          <div class="container mb-5  ">
+            <div class="row mb-5 p-5">
+             
+              <div class="col-md-3 text-white foot">
+                <h6>ABOUT ZEYOLA</h6>
+                <li> <a href="">About us</a></li>
+                  <li> <a href="">Terms and Conditions</a></li>
+                  <li> <a href="">Privacy Notice</a></li> 
+                   <li>  <a href="">Payment Information Guidelines</a></li>
+                  
+              </div> 
+              <div class="col-md-3 text-white foot">
+                <h6>NEED HELP?</h6>
+                <li><a href="">Chat with us</a></li>  <li><a href="">Help center</a> </li> <li><a href="">Contact Us</a></li>
+                
+              </div>
+
+              <div class="col-md-3 text-white foot">
+                <h6>BUYING ON ZEYOLA</h6>
+                
+                  <li><a href="">Buyer Safety Center</a></li> 
+                   <li> <a href="">FAQs</a></li>
+                  <li><a href="">Delivery</a> </li>
+                  <li><a href="">Zeyola Return policy</a> </li>
+                  
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center text-white">
+                <h5>PAYMENT METHOD & DELIVERY METHOD</h5>
+                <div class="m-auto text-lg bro">
+                  <i class="fa-brands fa-cc-visa ml-3"></i>
+                  <i class="fa-brands fa-cc-mastercard ml-3"></i>
+                  <i class="fa-brands fa-paypal ml-3"></i>
+                  <i class="fa-brands fa-dhl ml-3 dhl"></i>
+                </div>
+                
+  
+              </div>
+          </div>
+          <div class="container text-secondary text-center">
+            <hr>
+            <p >Copyright c 2024 Zeyola.com. All right reserved</p>
+          </div>
+  
+        </div>
+      </footer>
+     
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/static/js/jquery-3.7.1.min.js"></script>
+
+</body>
+</html>

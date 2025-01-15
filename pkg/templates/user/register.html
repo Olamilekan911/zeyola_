@@ -1,88 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/reg.css">
-    <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
-    <link rel="stylesheet" href="/static/bootstrap/bootstrap.min.css">
-</head>
-<body class="body">
-    <div class="container-fluid">
-        <div class="container-fluid ">
-          
-            <div class="container-fluid">
-              <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
-                  <div class="container">
-                      <!-- Logo Section -->
-                      <a class="navbar-brand nav-font  text-dark fw-bold" href="#">
-                          <i class="fa-brands fa-slack text-warning"></i> Echo Stock
-                      </a>
-          
-                      <!-- Toggler Button -->
-                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                      </button>
-          
-                      <!-- Collapsible Content -->
-                      
-                              
-                      <li><a class="dropdown-item text-warning" href="/signup/"><i class="fa-solid fa-sign-out me-2"></i>Sign Up</a></li>
-          
-                              
-              </nav>
-          </div>
-          
-          
-        </div>
-        <div class="container px-4 py-5 bg-light" id="featured-3">
-            <div class="row g-4 py-5">
-                <div class="col-md-10 mx-auto col-lg-5">
-                   <h2 class="pb-2 text-center mb-3">Sign Up</h2>
-                    {% set message = get_flashed_messages(with_categories=True) %}
-                    {% if message %}
-                      {% for msg,cat in message %}
-                        {% if cat == 'errormsg' %}
-                        <div class="alert alert-danger">{{msg}}</div>
-                        {% else %}
-                        <div class="alert alert-success">{{msg}}</div>
-                        {% endif %}
-    
-                      {% endfor %}
-                    {% endif %}
-                    <form action="/register/" method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                          <div class="form-floating mb-3">
-                              <input name="fname" type="firstname" class="form-control" id="floatingInput" placeholder="name@example.com">
-                              <label for="floatingInput">First Name</label>
-                          </div>
-                          <div class="form-floating mb-3">
-                              <input name="lname" type="lastname" class="form-control" id="floatingInput" placeholder="name@example.com">
-                              <label for="floatingInput">Last Name</label>
-                          </div>
-                        <div class="form-floating mb-3">
-                          <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                          <label for="floatingInput">Email address</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                          <input type="password" name="pass" class="form-control" id="password" placeholder="Password">
-                          <label for="floatingPassword">Password</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                          <input type="password" name="confirm" class="form-control" id="floatingPassword" placeholder="Password">
-                          <label for="floatingPassword">Confirm Password</label>
-                        </div>
-                        <div class="checkbox mb-3">
-                          
-                        </div>
-                        <button class="w-100 btn btn-lg btn-danger noround" type="submit">Sign Up</button>
-                        <hr class="my-4">
-                        <a href="/login/" class="text-body-secondary">Already have an account? Sign In</a>
-                      </form>
-                </div>
+{% extends 'user/formnav.html' %}
+{% block title %} Register {% endblock %}
+{% block body %}
+<div class="container px-4 py-5 pad" style="max-width: 500px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <div class="text-center mb-4 pad">
+        <h2 class="pb-2 mb-3" style="font-weight: bold; color: #333;">Sign Up</h2>
+        <p class="text-muted" style="font-size: 14px;">Create your account and start shopping today.</p>
+    </div>
+    {% set message = get_flashed_messages(with_categories=True) %}
+    {% if message %}
+        {% for msg, cat in message %}
+            <div class="alert alert-{{ 'danger' if cat == 'errormsg' else 'success' }}" style="font-size: 14px;">
+                {{ msg }}
             </div>
-        </div>     
-   </div> 
-</body>
-</html>
+        {% endfor %}
+    {% endif %}
+    <form method="POST" class="bg-white p-4 rounded shadow-sm" style="border: 1px solid #e0e0e0;">
+        {{ form.hidden_tag() }}
+
+        <!-- First Name Field -->
+        <div class="mb-3">
+            <label for="fname" class="form-label" style="font-weight: bold; color: #555;">First Name</label>
+            {{ form.fname(class="form-control form-control-lg", id="fname", placeholder="Enter your first name") }}
+        </div>
+
+        <!-- Last Name Field -->
+        <div class="mb-3">
+            <label for="lname" class="form-label" style="font-weight: bold; color: #555;">Last Name</label>
+            {{ form.lname(class="form-control form-control-lg", id="lname", placeholder="Enter your last name") }}
+        </div>
+
+        <!-- Email Field -->
+        <div class="mb-3">
+            <label for="email" class="form-label" style="font-weight: bold; color: #555;">Email</label>
+            {{ form.email(class="form-control form-control-lg", id="email", placeholder="Enter your email") }}
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-3">
+            <label for="password" class="form-label" style="font-weight: bold; color: #555;">Password</label>
+            {{ form.password(class="form-control form-control-lg", id="password", placeholder="Enter a secure password") }}
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="mb-3">
+            <label for="cpassword" class="form-label" style="font-weight: bold; color: #555;">Confirm Password</label>
+            {{ form.cpassword(class="form-control form-control-lg", id="cpassword", placeholder="Confirm your password") }}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+            {{ form.submit(class="btn btn-warning btn-lg", style="background-color: #f68b1e; border: none; font-weight: bold;") }}
+        </div>
+
+        <!-- Additional Links -->
+        <hr class="my-4">
+        <div class="text-center">
+            <p class="text-muted mb-0" style="font-size: 14px;">
+                Already have an account? 
+                <a href="/login/" class="text-decoration-none" style="color: #f68b1e;">Sign In</a>
+            </p>
+        </div>
+    </form>
+</div>
+{% endblock %}
