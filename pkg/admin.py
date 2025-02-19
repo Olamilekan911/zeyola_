@@ -141,16 +141,22 @@ def add_product():
     return redirect("/add-product/")
 
 
+<<<<<<< HEAD
 
 
 @app.route('/update-product/<int:product_id>/', methods=["GET", "POST"])
 def update_product(product_id):
     # Check if admin is logged in
+=======
+@app.route('/update-product/<int:product_id>/', methods=["GET", "POST"])
+def update_product(product_id):
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     admin_id = session.get("admin_loggedin")
     if not admin_id or not db.session.query(Admin).filter(Admin.id == admin_id).first():
         flash('You need to log in first!', 'error')
         return redirect('/adminlog/')
 
+<<<<<<< HEAD
     # Fetch the product to update
     product = Product.query.get_or_404(product_id)
 
@@ -159,6 +165,15 @@ def update_product(product_id):
     form.populate_categories()  # Populate categories if needed
 
     # Pre-fill the form with existing product data during GET request
+=======
+    # Fetch the product to be updated
+    product = Product.query.get_or_404(product_id)
+
+    form = AddProductForm()
+    form.populate_categories()  # Ensure categories are populated
+
+    # Pre-fill the form with the product's current data on a GET request
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     if request.method == "GET":
         form.pro_name.data = product.pro_name
         form.pro_category_id.data = product.pro_category_id
@@ -167,10 +182,21 @@ def update_product(product_id):
         form.new_price.data = product.new_price
         form.pro_desc.data = product.pro_desc
         form.pro_spec.data = product.pro_spec
+<<<<<<< HEAD
 
     # Handle form submission during POST request
     if form.validate_on_submit():
         # Update product fields
+=======
+        return render_template(
+            'admin/update.html',
+            form=form,
+            product=product
+        )
+
+    # If the form is submitted and valid
+    if form.validate_on_submit():
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
         product.pro_name = form.pro_name.data
         product.pro_category_id = form.pro_category_id.data
         product.in_stock = form.in_stock.data
@@ -179,6 +205,7 @@ def update_product(product_id):
         product.pro_desc = form.pro_desc.data
         product.pro_spec = form.pro_spec.data
 
+<<<<<<< HEAD
         # Handle product image replacement
         if form.pro_picture.data:
             if product.pro_picture:
@@ -196,6 +223,58 @@ def update_product(product_id):
         flash('Product updated successfully!', 'success')
         return redirect('/view-products/')
 
+=======
+        # If a new image is uploaded, replace the old one
+        if form.pro_picture.data:
+            try:
+                # Delete the old image if it exists
+                if product.pro_picture:
+                    old_picture_path = os.path.join(app.root_path, 'static', 'media', product.pro_picture)
+                    if os.path.exists(old_picture_path):
+                        os.remove(old_picture_path)
+
+                # Save the new image
+                upload_folder = os.path.join(app.root_path, 'static', 'media')
+                filename = secure_filename(form.pro_picture.data.filename)
+
+                # Verify file type
+                allowed_extensions = {"jpg", "jpeg", "png", "gif"}
+                if filename.split('.')[-1].lower() not in allowed_extensions:
+                    flash("Invalid file type. Only images are allowed.", "error")
+                    return render_template(
+                        'admin/update.html',
+                        form=form,
+                        product=product
+                    )
+
+                file_path = os.path.join(upload_folder, filename)
+                form.pro_picture.data.save(file_path)
+                product.pro_picture = filename
+            except Exception as e:
+                flash(f"An error occurred while updating the product image: {str(e)}", "error")
+                return render_template(
+                    'admin/update.html',
+                    form=form,
+                    product=product
+                )
+
+        # Commit the updated product details to the database
+        try:
+            db.session.commit()
+            flash('Product updated successfully!', 'success')
+        except Exception as e:
+            flash(f"An error occurred while saving changes: {str(e)}", "error")
+            return render_template(
+                'admin/update.html',
+                form=form,
+                product=product
+            )
+
+        return redirect('/view-products/')
+
+   
+
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     return render_template(
         'admin/update.html',
         form=form,
@@ -203,9 +282,12 @@ def update_product(product_id):
     )
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 @app.route('/delete-product/<int:product_id>/', methods=["POST"])
 def delete_product(product_id):
     admin_id = session.get("admin_loggedin")
@@ -216,22 +298,38 @@ def delete_product(product_id):
     product = Product.query.get_or_404(product_id)
 
     try:
+<<<<<<< HEAD
         
+=======
+        # Handle related orders and payments
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
         orders = Order.query.filter_by(product_id=product_id).all()
         for order in orders:
             payments = Payment.query.filter_by(payment_order_id=order.order_id).all()
             for payment in payments:
+<<<<<<< HEAD
                 db.session.delete(payment)  
             
             db.session.delete(order)  
         
         
+=======
+                db.session.delete(payment)  # Delete associated payments
+            
+            db.session.delete(order)  # Delete associated orders
+        
+        # Remove the product's image if it exists
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
         if product.pro_picture:
             picture_path = os.path.join(app.root_path, 'static', 'media', product.pro_picture)
             if os.path.exists(picture_path):
                 os.remove(picture_path)
 
+<<<<<<< HEAD
         
+=======
+        # Delete the product
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
         db.session.delete(product)
         db.session.commit()
 

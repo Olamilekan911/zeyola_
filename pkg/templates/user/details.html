@@ -1,22 +1,34 @@
 {% extends 'user/other.html' %}
+<<<<<<< HEAD
 {% block title%} Details {% endblock %}
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 {% block body %}
 
 
    
 {% for message in get_flashed_messages() %}
+<<<<<<< HEAD
 <div class=" alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 65px;">
+=======
+
+<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     <strong>{{ message }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endfor %}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     <div class="container-fluid bg-body-tertiary">
       <div class="container ">
         <div class="row ">
           <div class="col-md-8 sect">
             <div class="card bord shadow" style="min-height: 500px;">
+<<<<<<< HEAD
                 <div class="card-body">
                     <div class="row">
                         <!-- Product Image Section -->
@@ -82,6 +94,30 @@
             </div>
         </div>
         
+=======
+              <div class="card-body ">
+                
+                <div class="row">
+                  <div class="col-md-5 ">
+                    <img src="{{ url_for('static', filename='media/' + product.pro_picture) }}" class="img-fluid  image-sect" alt="{{ product.pro_name }}" id="ProductImg">
+                  </div>
+                
+                  <div class="col-md-7 mt-3">
+                    <h3>{{ product.pro_name | capitalize }}</h3>
+                    <strike class="text-body-secondary mt-3">&#8358;{{ product.old_price}}</strike>
+                    <strong class="large mt-3">&#8358;{{ product.new_price }}</strong><br>
+                    <small>In stock {{ product.in_stock }}</small>
+                    <div class="star mt-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><span class="text-secondary"><i class="fa-solid fa-star"></i></span></div>
+                    {% set in_cart = product.product_id in cart_items | map(attribute='product_id') %}
+                    <button class="btn btn-warning but col-12 mt-3 shadow do" data-product-id="{{ product.product_id }}"><span><i class="fa-solid fa-cart-plus"></i></span>Add to Cart</button>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
           <div class="col-md-4">
             <div class="card shadow sect">
               <div class="card-body">

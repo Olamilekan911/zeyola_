@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Zeyola | {% block title%} {% endblock %} </title>
+=======
+    <title>Zeyola </title>
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/main.css">
 </head>
+<<<<<<< HEAD
 <body class="bg-body-tertiary">
   <!-- Navbar section -->
   <div class="container-fluid">
@@ -45,12 +50,44 @@
                 <!-- Account, Help, and Cart -->
                 <ul class="navbar-nav ms-auto">
                     <!-- Account Dropdown -->
+=======
+<body class="back">
+  <!-- Navbar section -->
+  <div class="container-fluid">
+
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand nav-font text-dark fw-bold" href="/">
+                <i class="fa-brands fa-affiliatetheme text-warning"></i> Zeyola
+            </a>
+    
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+              
+                
+                <form class="d-flex mx-auto w-50" role="search" action="/search/">
+                    <input class="form-control me-2 shadow" type="search" name="query" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-warning text-white shadow" type="submit">Search</button>
+                </form>
+
+    
+                
+                <ul class="navbar-nav ms-auto">
+                    
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                     <li class="nav-item dropdown">
                         {% if cus_deets %}
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user"></i> Hi, {{ cus_deets.fname }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+<<<<<<< HEAD
                                 <li><a class="dropdown-item" href="/profile/"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
                                 <li><a class="dropdown-item" href="/orders/"><i class="fa-solid fa-truck-fast me-2"></i>Order</a></li>
                                 <li><hr class="dropdown-divider"></li>
@@ -70,6 +107,33 @@
                     </li>
 
                     <!-- Help Dropdown -->
+=======
+                                <li>
+                                    <a class="dropdown-item" href="/profile/">
+                                        <i class="fa-solid fa-user me-2"></i>Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/orders/">
+                                        <i class="fa-solid fa-truck-fast me-2"></i> Order
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-warning" href="/logout/">
+                                        <i class="fa-solid fa-sign-out me-2"></i>Sign Out
+                                    </a>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <a class="nav-link text-dark btn btn-warning" href="/login/">
+                                <i class="fa-regular fa-user"></i> Sign In
+                            </a>
+                        {% endif %}
+                    </li>
+    
+        
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark" href="#" id="helpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-question"></i> Help
@@ -86,25 +150,54 @@
                         </ul>
                     </li>
 
+<<<<<<< HEAD
                     <!-- Cart -->
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link-2 text-grey position-relative" href="/cart/">
                             <i class="fa-solid fa-cart-shopping me-1" style="font-size: 1.2rem;"></i>
                             <span id="cart-badge" class="badge position-absolute top-3 start-10 translate-middle text-warning" style="font-size: 1rem; min-width: 20px; min-height: 20px; background-color: transparent;">
+=======
+
+                   
+                        
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link text-grey position-relative" href="/cart/">
+                            <!-- Cart Icon -->
+                            <i class="fa-solid fa-cart-shopping me-1" style="font-size: 1.2rem;"></i>
+                            <!-- Cart Badge -->
+                            <span 
+                                id="cart-badge" 
+                                class="badge position-absolute top-3 start-10 translate-middle text-warning" 
+                                style="font-size: 1rem; min-width: 20px; min-height: 20px; background-color: transparent;">
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                                 {{ cart_count }}
                             </span>
                         </a>
                     </li>
+<<<<<<< HEAD
+=======
+                    
+                        
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                 </ul>
             </div>
         </div>
     </nav>
+<<<<<<< HEAD
 
 
    
 </div>
 
 
+=======
+    
+
+    
+    
+</div>
+
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     <!-- end of first navbar -->
 
     
@@ -228,10 +321,13 @@
 });
 
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
   // Handle Cancel Pay button click
   $("#cancelPay").on("click", function () {
     $("#total").text("000");

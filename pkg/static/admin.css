@@ -70,3 +70,38 @@
   }
 }
 
+<<<<<<< HEAD
+=======
+
+.content-section {
+  display: none;
+}
+
+.content-section.active {
+  display: block;
+}
+
+
+header {
+  /* background-color: #e5e5e5;  */
+  background-color: rgba(190, 186, 186, 0.808);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.card {
+  border: none;
+}
+
+.card-title {
+  color: #8b4513; 
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0

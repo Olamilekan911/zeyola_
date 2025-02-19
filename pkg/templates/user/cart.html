@@ -1,5 +1,8 @@
 {% extends 'user/other.html' %}
+<<<<<<< HEAD
 {% block title%} Cart {% endblock %}
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 {% block body %}
 
      
@@ -19,19 +22,31 @@
         <!-- Cart Items Section --> 
         <div class="col-lg-8">
             {% for item in cart_items %}
+<<<<<<< HEAD
             <div class="row mb-3 border-bottom pb-3 bg-white p-3">
                 <div class="col-3">
                     <!-- Product Image -->
                     <a href="{{ url_for('product_details', product_id=item['pro_id']) }}">
                         <img src="{{ url_for('static', filename='media/' + item['pro_picture']) }}" 
                              alt="{{ item['product_name'] }}" 
+=======
+            <div class="row mb-3 border-bottom pb-3 bg-white">
+                <div class="col-3">
+                    <!-- Product Image -->
+                    <a href="/details/{{ item.product_id }}/">
+                        <img src="{{ url_for('static', filename='media/' + item.pro_picture) }}" 
+                             alt="{{ item.product_name }}" 
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                              class="img-fluid rounded"
                              style="max-height: 120px;">
                     </a>
                 </div>
+<<<<<<< HEAD
                 
                 
                 
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                 <div class="col-6">
                     <!-- Product Details -->
                     <h4 class="fw-bold">{{ item.product_name }}</h4>

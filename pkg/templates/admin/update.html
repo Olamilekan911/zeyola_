@@ -1,13 +1,20 @@
 {% extends 'admin/header.html' %}
 {% block body %}
 
+<<<<<<< HEAD
 <!-- Display flash messages -->
 {% for message in get_flashed_messages() %}
+=======
+     
+{% for message in get_flashed_messages() %}
+
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
     <strong>{{ message }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endfor %}
+<<<<<<< HEAD
 
 <!-- Update Product Form -->
 <form method="POST" enctype="multipart/form-data" class="mt-4">
@@ -75,4 +82,42 @@
     <button type="submit" class="btn btn-primary">Update Product</button>
 </form>
 
+=======
+<form method="POST" enctype="multipart/form-data" >
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.pro_name.label }}
+        {{ form.pro_name(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.pro_category_id.label }}
+        {{ form.pro_category_id(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.in_stock.label }}
+        {{ form.in_stock(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.old_price.label }}
+        {{ form.old_price(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.new_price.label }}
+        {{ form.new_price(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.pro_desc.label }}
+        {{ form.pro_desc(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.pro_spec.label }}
+        {{ form.pro_spec(class="form-control") }}
+    </div>
+    <div class="form-group mb-5 mt-3">
+        {{ form.pro_picture.label }}
+        {{ form.pro_picture(class="form-control ") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Update Product</button>
+</form>
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 {% endblock %}

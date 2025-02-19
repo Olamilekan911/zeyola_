@@ -7,6 +7,7 @@
 .beat{
     background-color: white;
 }
+<<<<<<< HEAD
 .nav-color{
   background-color: #444;
   color: white;
@@ -20,6 +21,8 @@
 .nav-con{
   color: #111;
 }
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 .sect{
   margin-top: 100px;
   margin-bottom: 30px;
@@ -394,6 +397,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
+<<<<<<< HEAD
 .content-container {
   max-width: 900px;
   margin: auto;
@@ -654,3 +658,5 @@ h1 {
   }
 }
 
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0

@@ -74,7 +74,11 @@
      
     {% for message in get_flashed_messages() %}
 
+<<<<<<< HEAD
     <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 65px;">
+=======
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
         <strong>{{ message }}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -90,8 +94,12 @@
             <p><strong>Amount:</strong> &#8358;{{ "{:,.2f}".format(total_price) }}</p>
             <p><strong>Quantity:</strong>{{ total_quantity }}</p>
             <p><strong>Email:</strong> {{ cus_deets.email }}</p>
+<<<<<<< HEAD
             <p><strong>Order Reference:</strong> <span class="highlight">{{ trxdeets[0].order_reference }}</span></p>
 
+=======
+            <p><strong>Order Reference:</strong> <span class="highlight">{{ trxdeets.order_reference }}</span></p>
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
             <p><small class="text-muted">Keep your order reference handy for future inquiries.</small></p>
         </div>
 

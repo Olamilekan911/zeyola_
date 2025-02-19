@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Zeyola | {% block title%} {% endblock %}</title>
+=======
+    <title>Buyify</title>
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/main.css">
 </head>
+<<<<<<< HEAD
 <style>
   .card.h-100 .btn-warning {
     opacity: 0; /* Initially hidden */
@@ -216,6 +221,52 @@
 
      
     
+=======
+<body class="bg-body-tertiary">
+    
+     
+    {% for message in get_flashed_messages() %}
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    <div class="container-fluid">
+
+
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+            <div class="container">
+                
+                <a class="navbar-brand nav-font text-dark fw-bold" href="/">
+                    <i class="fa-brands fa-affiliatetheme text-warning"></i> Zeyola
+                </a>
+
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    
+                    <form class="d-flex ms-auto w-20" role="search" action="/search/">
+                        <input class="form-control me-2 shadow" type="search" name="query" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-warning text-white shadow" type="submit">Search</button>
+                    </form>
+
+                    
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+
+     
+    <div class="container-fluid back">
+    </div>
+
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
    
 
     {% block body %}
@@ -295,6 +346,7 @@
      
 <script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="/static/js/jquery-3.7.1.min.js"></script>
+<<<<<<< HEAD
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Select all product cards
@@ -423,6 +475,8 @@
 
 
 </script>
+=======
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 
 </body>
 </html>

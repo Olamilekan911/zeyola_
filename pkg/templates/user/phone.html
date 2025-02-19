@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 {% extends 'user/other.html'%}  
 {% block title%} Phone {% endblock %} 
+=======
+{% extends 'user/other.html'%}   
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
 {% block body %}
 
      
 {% for message in get_flashed_messages() %}
 
+<<<<<<< HEAD
 <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 65px;">
+=======
+<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
     <strong>{{ message }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
@@ -54,23 +62,40 @@
                                             <div class="mb-2">
                                                 {% if product.old_price %}
                                                 <strike class="text-muted text-decoration-line-through d-block">
+<<<<<<< HEAD
                                                     ₦{{ product.old_price }}
                                                 </strike>
                                                 {% endif %}
                                                 <span class="fw-bold text-success">
                                                     ₦{{ product.new_price or 'N/A' }}
+=======
+                                                    ${{ product.old_price }}
+                                                </strike>
+                                                {% endif %}
+                                                <span class="fw-bold text-success">
+                                                    ${{ product.new_price or 'N/A' }}
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                                                 </span>
                                             </div>
                         
                                             <!-- Add to Cart Button -->
                                             {% set in_cart = product.product_id in cart_items | map(attribute='product_id') %}
                                             <div class="mt-auto">
+<<<<<<< HEAD
                                                 <form method="POST" action="/cart/add/" >
                                                     <input type="hidden" name="product_id" value="{{ product.product_id }}">
                                                     <button type="submit" class="btn btn-warning w-100 rounded px-3">
                                                         <i class="fa fa-cart-plus me-2"></i> Add to Cart
                                                     </button>
                                                 </form>
+=======
+                                                <button 
+                                                    class="btn btn-warning w-100 rounded-4 px-3 do" 
+                                                    data-product-id="{{ product.product_id }}">
+                                                    <i class="fa fa-cart-plus me-2"></i>
+                                                    Add to Cart
+                                                </button>
+>>>>>>> df26ad94bd672a1a015aaf5dab0fd72cd9c324e0
                                             </div>
                                         </div>
                                     </div>
