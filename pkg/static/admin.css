@@ -1,33 +1,56 @@
-
+/* Sidebar base styling */
 .sidebar {
-  background-color: rgb(182, 118, 0); 
+  background-color: rgb(182, 118, 0); /* Golden shade */
   width: 250px;
   transition: all 0.3s ease;
 }
 
+/* Sidebar links */
 .sidebar a {
   color: white;
   font-weight: 500;
   margin-bottom: 10px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  padding: 10px 15px; /* Add padding for a better clickable area */
+  display: block; /* Ensure links span the full width */
+  border-radius: 4px; /* Subtle rounding for links */
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  text-decoration: none; /* Remove underline */
 }
 
-.sidebar a:hover {
-  background-color: #d39c06; 
+/* Hover effect for sidebar links */
+.nav-item a:hover {
+  background-color: #d39c06; /* Slightly lighter golden color */
+  transform: scale(1.05); /* Subtle zoom effect */
+  color: white; /* Keep text white */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a slight shadow on hover */
+}
+
+/* Active link style (optional if highlighting current page) */
+.nav-item a.active {
+  background-color: #d39c06; /* Match hover color */
+  font-weight: bold; /* Highlight the active link */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling the Logout button to maintain consistency */
+.nav-item .no-hover {
+  color: black;
+  background-color: #ffc107; /* Warning yellow */
+  font-weight: bold;
+  padding: 8px 12px;
   border-radius: 4px;
-  text-decoration: none;
-  padding: 5px;
-  transform: scale(1.09);
-  transition: 0.4s;
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-a.no-hover:hover {
-  color: inherit; /* Keep the current text color */
-  background-color: inherit; /* Keep the current background */
-  text-decoration: none; /* Remove underline or any other decoration */
+.nav-item .no-hover:hover {
+  background-color: #e0a800; /* Darker yellow */
+  color: black; /* Keep text readable */
+  text-decoration: none; /* Prevent underline */
 }
 
-
+/* Responsive behavior */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -39,50 +62,11 @@ a.no-hover:hover {
   .sidebar.open {
     transform: translateX(0);
   }
-
-  .main-content {
-    margin-left: 0;
-  }
-
-  .menu-toggle {
-    display: inline-block;
-  }
 }
-
-@media (min-width: 769px) {
+/* Hide menu toggle on larger screens (desktop) */
+@media (min-width: 768px) {
   .menu-toggle {
     display: none;
   }
 }
 
-
-.content-section {
-  display: none;
-}
-
-.content-section.active {
-  display: block;
-}
-
-
-header {
-  /* background-color: #e5e5e5;  */
-  background-color: rgba(190, 186, 186, 0.808);
-  font-size: 18px;
-  font-weight: bold;
-}
-
-
-.card {
-  border: none;
-}
-
-.card-title {
-  color: #8b4513; 
-  font-weight: bold;
-}
-
-.card-text {
-  font-size: 1.2rem;
-  font-weight: 600;
-}

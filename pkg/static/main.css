@@ -7,6 +7,64 @@
 .beat{
     background-color: white;
 }
+.nav-color{
+  background-color: #444;
+  color: white;
+}
+.nav-margin{
+  margin-top: 65px;
+}
+.nav-link{
+  color: rgb(235, 234, 234);
+}
+.nav-con{
+  color: #111;
+}
+.sect{
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+.image-sect{
+  width: 100%;
+  height: 350px;
+}
+.star{
+  color: orange;
+
+}
+.bord{
+  border: none;
+}
+.large{
+  font-size: 25px;
+}
+.but{
+  color: white;
+  background-color: orange;
+  font-size: 18px;
+  font-weight: 600;
+}
+.small-img-row{
+  display: flex;
+  justify-content: space-between;
+
+}
+.small-img-col{
+  flex-basis: 24%;
+  cursor: pointer;
+}
+.msg{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 120px;
+  color: rgb(228, 157, 26);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.don{
+  justify-content: space-evenly;
+}
 .maz{
   margin-top: 60px;
 }
@@ -40,7 +98,7 @@
   font-size: 20px;
   font-weight: bolder;
 }
-.phone{
+.ph{
   background-color: rgb(0, 7, 0);
   color: white;
   font-size: 20px;
@@ -53,19 +111,19 @@
   font-size: 20px;
   font-weight: bolder;
 }
-.beauty{
+.bea{
   background-color: rgb(24, 24, 1);
   color: white;
   font-size: 20px;
   font-weight: bolder;
 }
-.gadget{
+.gad{
   background-color: rgb(0, 10, 10);
   color: white;
   font-size: 20px;
   font-weight: bolder;
 }
-.super{
+.sup{
   background-color: rgb(17, 11, 1);
   color: white;
   font-size: 20px;
@@ -194,6 +252,10 @@ font-size: 50px;
 }
 .nbg{
 background-color: #222;
+align-items: center;
+display: flex;
+justify-content: center;
+padding: 20px;
 }
 .bro{
 font-size: 20px;
@@ -232,5 +294,363 @@ text-decoration: none;
 
 .foot li a:hover {
 text-decoration: underline;
+}
+
+.ban{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/male-banner.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.beauty{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/beauty.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.super{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/sup.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.phone{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/phine.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.gadget{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/gadget.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.app{
+  justify-content: center;
+  display: flex;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  background-image:linear-gradient(360deg,transparent,rgba(10, 10, 10, 0.5),rgba(10, 10, 10, 0.5)),url(/static/img/elect.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px;
+  min-height: 250px;
+  font-size: 50px;
+}
+.card-big{
+  min-height: 180px;
+  padding: 15px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.btn-gray{
+  background-color: rgb(250, 164, 5);
+  color: white;
+}
+.pad{
+  margin-top: 30px;
+}
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.content-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Order Card Styles */
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-card img {
+  height: 80px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.order-details {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.order-details h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.order-details p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Order Status Styles */
+.order-status {
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.status-delivered {
+  background-color: green;
+}
+
+.status-ongoing {
+  background-color: blue;
+}
+
+.status-pending {
+  background-color: red;
+}
+
+/* Details Link Styles */
+.details-link {
+  font-size: 14px;
+  font-weight: bold;
+  color: orange;
+  text-decoration: none;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+}
+
+/* Pagination Styles */
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 10px 15px;
+  color: #007bff;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.pagination a.active {
+  background-color: orange;
+  color: white;
+  border-color: orange;
+}
+
+.pagination a:hover {
+  background-color: #0056b3;
+  color: rgb(253, 129, 129);
+}
+.magg{
+  margin-top: 100px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  /* Sidebar and Navbar adjustments */
+  .nav-margin {
+      margin-top: 40px;
+  }
+  .nav-color {
+      background-color: #444;
+      padding: 10px;
+  }
+
+  .nav-link {
+      font-size: 14px;
+  }
+
+  /* Category and Search Pages: Card layout */
+  .card-big {
+      min-height: auto;
+      padding: 10px;
+  }
+
+  .small-img-row {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .small-img-col {
+      flex-basis: 100%;
+      margin-bottom: 20px;
+  }
+
+  /* Adjust container padding and margin */
+  .container, .container-fluid {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+
+  /* Adjust grid layout for product cards */
+  .row g-3 {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  /* Adjust text size */
+  .nav-font, .logo {
+      font-size: 20px;
+  }
+
+  .btn-warning {
+      font-size: 16px;
+  }
+
+  .order-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+  }
+
+  /* Adjust product details */
+  .card-body h6 {
+      font-size: 14px;
+      margin-bottom: 10px;
+  }
+
+  .order-details p {
+      font-size: 12px;
+  }
+
+  /* Card Images */
+  .image-sect {
+      width: 100%;
+      height: 250px;
+  }
+
+  .order-card img {
+      height: 60px;
+      width: auto;
+  }
+
+  /* Adjust pagination button size */
+  .pagination a {
+      font-size: 14px;
+      padding: 8px 10px;
+  }
+
+  /* Flash message adjustments */
+  .alert {
+      margin-top: 10px;
+      padding: 10px;
+  }
+
+  /* Ensure elements inside cards align properly */
+  .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}
+
+/* Small Mobile Devices (Landscape) */
+@media (max-width: 576px) {
+  /* Adjust text sizes for small screens */
+  .card-title, .card-body h6 {
+      font-size: 12px;
+  }
+
+  .btn-warning {
+      font-size: 14px;
+  }
+
+  /* Resize images */
+  .card-img-top {
+      max-width: 100%;
+      height: 150px;
+  }
+
+  /* Fix the spacing and layout for small screens */
+  .container, .container-fluid {
+      padding: 10px;
+  }
+
+  /* Adjust navbar and footer */
+  .nav-font {
+      font-size: 18px;
+  }
+
+  .foot {
+      padding: 15px;
+  }
+
+  .pagination a {
+      font-size: 12px;
+      padding: 5px 8px;
+  }
+
+  /* Adjust product card layout */
+  .col-6 {
+      flex: 1 1 100%;
+  }
+
+  .card-body {
+      padding: 10px;
+  }
 }
 

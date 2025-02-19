@@ -1,0 +1,58 @@
+{% extends 'user/other.html'%} 
+{% block title%} Order {% endblock %}  
+{% block body %}
+    <div class="content-container magg">
+        <h1>My Orders</h1>
+
+        {% if orders %}
+            {% for order in orders %}
+                {% if order.order_status == 'Completed' %}
+                <div class="order-card">
+                    <!-- Order Image -->
+                    <img src="{{ url_for('static', filename='img/' + order.product.pro_picture) }}" alt="{{ order.product.pro_name }}">
+
+                    <!-- Order Info -->
+                    <div class="order-details">
+                        <h3>{{ order.product.pro_name }}</h3>
+                        <p>Order Reference: <strong>{{ order.order_reference }}</strong></p>
+                        <p>Quantity: {{ order.order_quantity }}</p>
+                        <p>Price: &#8358;{{ order.order_price }}</p>
+                        <span class="order-status 
+                            {% if order.order_status == 'Delivered' %}status-delivered
+                            {% elif order.order_status == 'Ongoing' %}status-ongoing
+                            {% else %}status-pending
+                            {% endif %};">
+                            {{ order.order_status }}
+                        </span>
+                    </div>
+
+                    <!-- Order Details Link -->
+                    <a href="{{ url_for('product_details', product_id=order.product_id) }}" class="details-link">See details</a>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Pagination (only show if more than one page) -->
+            {% if total_pages > 1 %}
+            <div class="pagination">
+                {% if current_page > 1 %}
+                <a href="{{ url_for('view_orders', page=current_page - 1) }}">Previous</a>
+                {% endif %}
+
+                {% for page_num in range(1, total_pages + 1) %}
+                <a href="{{ url_for('view_orders', page=page_num) }}"
+                   class="{% if page_num == current_page %}active{% endif %}">
+                    {{ page_num }}
+                </a>
+                {% endfor %}
+
+                {% if current_page < total_pages %}
+                <a href="{{ url_for('view_orders', page=current_page + 1) }}">Next</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

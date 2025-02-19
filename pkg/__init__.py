@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask,render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
 from pkg import config, forms
 from pkg.models import db,Customer
+
 
 
 
@@ -22,6 +23,10 @@ def create_app():
     app.config.from_pyfile("config.py")
     app.config.from_object(config.BaseConfig)
     
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template('user/404.html')
+
 
     #db = SQLAlchemy(app)
     db.init_app(app)

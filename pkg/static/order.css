@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.order-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-card img {
+    height: 80px;
+    width: auto;
+    border-radius: 5px;
+}
+
+.order-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.order-info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.order-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.status {
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    background-color: #007bff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.details-link {
+    font-size: 14px;
+    font-weight: bold;
+    color: orange;
+    text-decoration: none;
+}
+
+.details-link:hover {
+    text-decoration: underline;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 10px 15px;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: orange;
+    color: white;
+    border-color: orange;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+    color: white;
+}

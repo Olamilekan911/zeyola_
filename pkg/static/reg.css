@@ -1,0 +1,38 @@
+
+
+form {
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  form .form-control-lg {
+    height: 50px;
+    font-size: 16px;
+  }
+  
+  form .btn-warning {
+    background-color: #f68b1e;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    height: 50px;
+    font-size: 18px;
+  }
+  
+  form .btn-warning:hover {
+    background-color: #e67e22;
+  }
+  
+  form p {
+    font-size: 12px;
+    color: #6c757d;
+  }
+  
+  form a {
+    color: #f68b1e;
+    text-decoration: none;
+  }
+  

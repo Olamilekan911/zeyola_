@@ -1,0 +1,75 @@
+{% extends 'user/searchnav.html' %}
+{% block title %}Search Results{% endblock %}
+{% block body %}
+
+
+
+
+
+<div class="container mt-5 p-5">
+    <h1 class="text-center">Search Results</h1>
+    <p class="text-center">Results for "{{ query }}"</p>
+
+    {% if results %}
+    <div class="card card-big">
+        <div class="card-body d-flex">
+            <div class="container">
+                <div class="row g-3">
+                    {% for product in results %}
+                    <div class="col-6 col-md-4 col-lg-3"> <!-- col-6 ensures 2 per row on mobile -->
+                        <div class="card h-100 shadow-sm caer">
+                            <!-- Product Image -->
+                            <a href="/details/{{ product.product_id }}/">
+                                <img 
+                                    src="{{ url_for('static', filename='media/' + product.pro_picture) }}" 
+                                    class="card-img-top" 
+                                    alt="{{ product.pro_name or 'Product Image' }}">
+                            </a>
+                    
+                            <!-- Product Details -->
+                            <div class="card-body d-flex flex-column">
+                                <!-- Product Name -->
+                                <h6 class="card-title">
+                                    {{ product.pro_name or 'Unnamed Product' }}
+                                </h6>
+                    
+                                <!-- Prices -->
+                                <div class="mb-2">
+                                    <span class="price">₦{{ product.new_price or 'N/A' }}</span>
+                                    <br>
+                                    <span class="old-price">₦{{ product.old_price or 'N/A' }}</span>
+                                    <span class="discount">-{{ product.discount or '50' }}%</span>
+                                </div>
+                    
+                                <!-- Star Rating (Optional) -->
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <span>({{ product.in_stock or '0' }})</span>
+                                </div>
+                    
+                                <!-- Add to Cart Button (Full-width on mobile) -->
+                                <div class="mt-auto d-flex justify-content-center">
+                                    <button 
+                                        class="btn btn-warning do w-90" 
+                                        data-product-id="{{ product.product_id }}">
+                                        <i class="fa fa-cart-plus me-2"></i> Add to Cart
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No products found matching your search.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

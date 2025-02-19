@@ -1,0 +1,189 @@
+{% extends 'user/other.html' %}
+{% block title%} Details {% endblock %}
+{% block body %}
+
+
+   
+{% for message in get_flashed_messages() %}
+<div class=" alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 65px;">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+
+    <div class="container-fluid bg-body-tertiary">
+      <div class="container ">
+        <div class="row ">
+          <div class="col-md-8 sect">
+            <div class="card bord shadow" style="min-height: 500px;">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Product Image Section -->
+                        <div class="col-md-5 text-center">
+                            <img src="{{ url_for('static', filename='media/' + product.pro_picture) }}" class="img-fluid image-sect rounded" alt="{{ product.pro_name }}" id="ProductImg">
+                            
+                        </div>
+        
+                        <!-- Product Details Section -->
+                        <div class="col-md-7">
+                            <!-- Product Name -->
+                            <h3 class="fw-bold">{{ product.pro_name | capitalize }}</h3>
+                            
+                            <!-- Pricing -->
+                            <div class="mt-3">
+                                <strike class="text-secondary">&#8358;{{ product.old_price }}</strike>
+                                <strong class="text-dark h4 d-block">&#8358;{{ product.new_price }}</strong>
+                                <small class="text-success">In stock: {{ product.in_stock }}</small>
+                            </div>
+        
+                            <!-- Rating -->
+                            <div class="star mt-3">
+                                <i class="fa-solid fa-star text-warning"></i>
+                                <i class="fa-solid fa-star text-warning"></i>
+                                <i class="fa-solid fa-star text-warning"></i>
+                                <i class="fa-solid fa-star text-warning"></i>
+                                <span class="text-secondary"><i class="fa-solid fa-star"></i></span>
+                                <span class="text-muted">(5 verified ratings)</span>
+                            </div>
+        
+                            <!-- Cart Actions -->
+                            <div class="d-flex align-items-center mt-4">
+                              {% if cart_item %}
+                                  <!-- Quantity Adjustment Buttons -->
+                                  <form method="POST" action="/details/{{ product.product_id }}/" class="me-2">
+                                      <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                                      <button type="submit" name="minus" class="btn btn-gray btn-sm">
+                                          <i class="fa fa-minus"></i>
+                                      </button>
+                                  </form>
+                                  <span class="fw-bold mx-2">{{ cart_item['quantity'] if cart_item is mapping else cart_item.cart_quantity }}</span>
+                                  <form method="POST" action="/details/{{ product.product_id }}/" class="ms-2">
+                                      <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                                      <button type="submit" name="plus" class="btn btn-warning btn-sm text-white">
+                                          <i class="fa fa-plus"></i>
+                                      </button>
+                                  </form>
+                              {% else %}
+                                  <!-- Add to Cart Button -->
+                                  <form method="POST" action="/cart/add/">
+                                      <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                                      <button type="submit" class="btn btn-warning w-100 rounded px-3">
+                                          <i class="fa fa-cart-plus me-2"></i> Add to Cart
+                                      </button>
+                                  </form>
+                              {% endif %}
+                          </div>
+                          
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+          <div class="col-md-4">
+            <div class="card shadow sect">
+              <div class="card-body">
+                  <h6>Delivery & Return</h6>
+                  <hr>
+                  <strong>Echo Stock</strong>
+                  <p>We deliver product to anywhere nationwide</p>
+                  <hr>
+                  <strong>Choose your location</strong>
+                  <select name="" id="" class="form-control" >
+                    <option value="">State</option>
+                    <option value="">Osun</option>
+                    <option value="">Oyo</option>
+                    <option value="">Ondo</option>
+                    <option value="">Edo</option>
+                    <option value="">Delta</option>
+                    <option value="">Ogun</option>
+                    <option value="">Lagos</option>
+                  </select>
+                  <select name="" id="" class="form-control mt-3">
+                    <option value="">Lga</option>
+                    <option value="">Ede</option>
+                    <option value="">Ibadn</option>
+                    <option value="">Akure</option>
+                    <option value="">Ikeja</option>
+                    <option value="">Asaba</option>
+                    <option value="">Benin</option>
+                    <option value="">Abeokuta</option>
+                  </select>
+                  <div class="mt-4">
+                    <strong><span><i class="fa-solid fa-truck"></i></span>Door Delivery </strong><br>
+                  <small>Delivery for door to door delivery is <b>#3000</b><br>
+                  Ready to be delivered in the next 7 working days 
+                  </small>
+                  </div>
+                  <div class="mt-2">
+                    <strong><span><i class="fa-solid fa-truck-pickup"></i>Pickup Station</span></strong><br>
+                    <small>Pickup from our station is <b>#1000</b><br>
+                    Ready for pickup in the next 5 working days
+                    </small>
+
+                  </div>
+                  <div class="mt-2">
+                    <strong><span><i class="fa-solid fa-person-walking-arrow-loop-left"></i>Return Policy</span></strong><br>
+                    <small>Free return of  <b>ALL ELIGIBLE</b><br>
+                    items within 5 working days
+                    </small>
+
+                  </div>
+                  
+  
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <h3>Product Details</h3>
+                <hr>
+                <p>{{ product.pro_desc }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card shadow">
+              <div class="card-body">
+                <h3>Specification</h3>
+                <hr>
+                <li>{{ product.pro_spec }}</li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container ">
+        <div class="row ">
+          <div class="col">
+            <div class="card mb-5 shadow">
+              <div class="card-body">
+                <h5>Customer's Feedback</h5>
+                <hr>
+                  <div class="msg">
+                    <i class="fa-solid fa-message"></i>
+                    
+                  </div>
+                  <p class="text-center text-secondary ">No comment on the post yet</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    
+
+
+   
+  {% endblock %}

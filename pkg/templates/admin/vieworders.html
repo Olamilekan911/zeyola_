@@ -1,0 +1,78 @@
+{% extends 'admin/header.html' %}
+
+{% block body %}
+
+
+ 
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+<div class="container mt-5">
+    <h1 class="mb-4">All Orders</h1>
+
+    {% if orders.items %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Order Status</th>
+                <th>Payment ID</th>
+                <th>Order Reference</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders.items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ order.order_id }}</td>
+
+                
+                <td>{{ order.customer.id.fname }} {{ order.cus_id.lname }}</td>
+
+           
+                <td>{{ order.product_id.pro_name }}</td>
+
+                
+                <td>{{ order.order_quantity }}</td>
+
+                
+                <td>₦{{ '%.2f' | format(order.order_price) }}</td> 
+
+                
+                <td>{{ order.order_status }}</td>
+
+                
+                <td>{{ order.payment_id }}</td>
+                <td>{{ order.order_reference }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+   
+    <div class="pagination-container">
+        {% if orders.has_prev %}
+        <a href="{{ url_for('admin_orders', page=1) }}" class="btn btn-outline-primary">&laquo; First</a>
+        <a href="{{ url_for('admin_orders', page=orders.prev_num) }}" class="btn btn-outline-primary">&lt; Previous</a>
+        {% endif %}
+        <span class="current-page">Page {{ orders.page }} of {{ orders.pages }}</span>
+        {% if orders.has_next %}
+        <a href="{{ url_for('admin_orders', page=orders.next_num) }}" class="btn btn-outline-primary">Next &gt;</a>
+        <a href="{{ url_for('admin_orders', page=orders.pages) }}" class="btn btn-outline-primary">Last &raquo;</a>
+        {% endif %}
+    </div>
+
+    {% else %}
+    <p>No orders found.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeyola | {% block title%} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/Fa/css/all.css">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<style>
+  .card.h-100 .btn-warning {
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease; /* Smooth fade-in */
+    position: absolute; /* Absolute positioning for placement inside the card */
+    bottom: 10px; /* Adjust distance from the bottom of the card */
+    left: 10px; /* Adjust distance from the left of the card */
+    right: 10px; /* Adjust distance from the right of the card */
+    font-size: 0.875rem; /* Smaller font size */
+    padding: 5px 10px; /* Reduce padding for a smaller button */
+    height: auto; /* Auto height */
+    width: auto; /* Auto width */
+    border-radius: 5px; /* Rounded corners */
+}
+.card-img-top {
+    height: 200px; /* Set a fixed height for all images */
+    object-fit: cover; /* Ensures the image fills the dimensions without distortion */
+    object-position: center; /* Centers the cropped portion of the image */
+    width: 100%; /* Maintain full width */
+    border-radius: 5px; /* Optional: Add rounded corners for better aesthetics */
+}
+.card.h-100 {
+    border: 1px solid #e0e0e0; /* Light border for a clean look */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure content fits within the card */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
+}
+
+.card.h-100:hover {
+    transform: translateY(-5px); /* Slight upward hover animation */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow on hover */
+}
+
+.card-img-top {
+    height: 200px; /* Uniform height for all product images */
+    object-fit: cover; /* Ensures the image is scaled and cropped proportionally */
+    object-position: center; /* Centers the cropped portion of the image */
+    width: 100%; /* Full width */
+}
+
+.card-title {
+    font-size: 1rem; /* Adjusted font size for product name */
+    font-weight: bold;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.card .price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: black; /* Green for new price */
+}
+
+.card .old-price {
+    font-size: 0.9rem;
+    text-decoration: line-through;
+    color: #888; /* Gray for old price */
+}
+
+.card .discount {
+    font-size: 0.85rem;
+    color: #f8a304; /* Red for discount percentage */
+    font-weight: bold;
+}
+
+.card .rating {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #fbc02d; /* Gold for star rating */
+}
+
+.card .btn-warning {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 0; /* Adjust padding for button */
+    background-color: #ff9800; /* Orange background */
+    border: none;
+    border-radius: 0; /* Remove rounded corners */
+    width: 100%; /* Full-width button */
+    transition: background-color 0.2s ease;
+}
+
+.card .btn-warning:hover {
+    background-color: #ff9800; /* Darker orange on hover */
+}
+
+
+</style>
+<body class="bg-body-tertiary">
+    
+    <div class="container-fluid">
+
+  
+  
+
+        <!-- Main Navbar -->
+         
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+            <div class="container">
+             
+                
+                    
+              <nav class="navbar navbar-expand-lg ">
+                <div class="container">
+                    <!-- Dropdown Button -->
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="categoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+            
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                            <li><a class="dropdown-item" href="/phone/"><i class="fa-solid fa-mobile-screen"></i> Phones & Tablets</a></li>
+                            <li><a class="dropdown-item" href="/beauty/"><i class="fa-solid fa-heart"></i> Beauty</a></li>
+                            <li><a class="dropdown-item" href="/appliance/"><i class="fa-solid fa-tv"></i> Electronics & Appliances</a></li>
+                            <li><a class="dropdown-item" href="/fashion/"><i class="fa-solid fa-tshirt"></i> Fashion</a></li>
+                            <li><a class="dropdown-item" href="/supermarket/"><i class="fa-solid fa-shopping-basket"></i> Supermarket</a></li>
+                            <li><a class="dropdown-item" href="/gadget/"><i class="fa-solid fa-computer"></i> Computer & Gadget</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+                <!-- Logo -->
+                <a class="navbar-brand nav-font text-dark fw-bold" href="/">
+                    <i class="fa-brands fa-affiliatetheme text-warning"></i> Zeyola
+                </a>
+    
+                <!-- Toggler Button for Mobile View -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <!-- Navbar Content -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Search Bar -->
+                    <form class="d-flex mx-auto w-50" role="search" action="/search/">
+                        <input class="form-control me-2 shadow" type="search" name="query" placeholder="Search products, brands and categories" aria-label="Search">
+                        <button class="btn btn-warning text-white shadow" type="submit">Search</button>
+                    </form>
+    
+                    <!-- Account, Help, and Cart -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Account Dropdown -->
+                        <li class="nav-item dropdown">
+                            {% if cus_deets %}
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i> Hi, {{ cus_deets.fname }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                                    <li><a class="dropdown-item" href="/profile/"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="/orders/"><i class="fa-solid fa-truck-fast me-2"></i>Order</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-warning" href="/logout/"><i class="fa-solid fa-sign-out me-2"></i>Sign Out</a></li>
+                                </ul>
+                            {% else %}
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-user"></i> Hi, Account
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                                <li><a class="dropdown-item" href="/profile/"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="/orders/"><i class="fa-solid fa-truck-fast me-2"></i>Order</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-warning" href="/login/"><i class="fa-solid fa-sign-out me-2"></i>Sign In</a></li>
+                            </ul>
+                            {% endif %}
+                        </li>
+    
+                        <!-- Help Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="helpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-question"></i> Help
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="helpDropdown">
+                                <li><a class="dropdown-item" href="#">Help Center</a></li>
+                                <li><a class="dropdown-item" href="#">Payment Option</a></li>
+                                <li><a class="dropdown-item" href="#">Place Order</a></li>
+                                <li><a class="dropdown-item" href="#">Track Order</a></li>
+                                <li><a class="dropdown-item" href="#">Cancel Order</a></li>
+                                <li><a class="dropdown-item" href="#">Return & Refund</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-warning" href="#"><i class="fa-brands fa-rocketchat me-2"></i>Live Chat</a></li>
+                            </ul>
+                        </li>
+    
+                        <!-- Cart -->
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link-2 text-grey position-relative" href="/cart/">
+                                <i class="fa-solid fa-cart-shopping me-1" style="font-size: 1.2rem;"></i>
+                                <span id="cart-badge" class="badge position-absolute top-3 start-10 translate-middle text-warning" style="font-size: 1rem; min-width: 20px; min-height: 20px; background-color: transparent;">
+                                    {{ cart_count }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+    
+       
+    </div>
+    
+    
+
+     
+    
+   
+
+    {% block body %}
+    {% endblock %}
+    <footer class="foot ">
+        <div class="container">
+          <div class="row mt-5">
+            <div class="col-md-4 ben p-3">
+                <i class="fa-brands fa-affiliatetheme text-warning"></i><span class="text-white">Zeyola</span>
+            </div>
+            <div class="col-md-4 p-3">
+              <p class="text-white">Subscribe to our newsletter to get updates on our latest offers!</p>
+              <form class="d-flex " role="search">
+                <input class="form-control me-2 " type="search" placeholder="Newsletter" aria-label="Search">
+                <button class="btn btn-outline-warning" type="submit">Subscribe</button>
+              </form>
+            </div>
+            <div class="col-md-4 p-3 text-center text-white">
+              <i class="fa-solid fa-envelope m-3"></i><span>Email Support</span>
+              <p>help@Zeyola.com</p>
+              <i class="fa-solid fa-phone m-3"></i><span>Phone Support</span>
+              <p>08074367382 , 07026665578</p>
+              <i class="fa-brands fa-whatsapp m-3"></i><span>Whatsapp</span>
+              <p>09060799235, 08065728282</p>
+            </div>
+          </div>
+        </div>
+        <div class="nbg">
+          <div class="container mb-5  ">
+            <div class="row mb-5 p-5">
+             
+              <div class="col-md-3 text-white foot">
+                <h6>ABOUT ZEYOLA</h6>
+                <li> <a href="">About us</a></li>
+                  <li> <a href="">Terms and Conditions</a></li>
+                  <li> <a href="">Privacy Notice</a></li> 
+                   <li>  <a href="">Payment Information Guidelines</a></li>
+                  
+              </div> 
+              <div class="col-md-3 text-white foot">
+                <h6>NEED HELP?</h6>
+                <li><a href="">Chat with us</a></li>  <li><a href="">Help center</a> </li> <li><a href="">Contact Us</a></li>
+                
+              </div>
+
+              <div class="col-md-3 text-white foot">
+                <h6>BUYING ON ZEYOLA</h6>
+                
+                  <li><a href="">Buyer Safety Center</a></li> 
+                   <li> <a href="">FAQs</a></li>
+                  <li><a href="">Delivery</a> </li>
+                  <li><a href="">Zeyola Return policy</a> </li>
+                  
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center text-white">
+                <h5>PAYMENT METHOD & DELIVERY METHOD</h5>
+                <div class="m-auto text-lg bro">
+                  <i class="fa-brands fa-cc-visa ml-3"></i>
+                  <i class="fa-brands fa-cc-mastercard ml-3"></i>
+                  <i class="fa-brands fa-paypal ml-3"></i>
+                  <i class="fa-brands fa-dhl ml-3 dhl"></i>
+                </div>
+                
+  
+              </div>
+          </div>
+          <div class="container text-secondary text-center">
+            <hr>
+            <p >Copyright c 2024 Zeyola.com. All right reserved</p>
+          </div>
+  
+        </div>
+      </footer>
+     
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/static/js/jquery-3.7.1.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Select all product cards
+        const productCards = document.querySelectorAll('.card.h-100');
+
+        productCards.forEach(card => {
+            const addToCartButton = card.querySelector('.btn-warning'); // Select the "Add to Cart" button
+
+            // Ensure the button is initially hidden
+            if (addToCartButton) {
+                addToCartButton.style.opacity = 0;
+                addToCartButton.style.transition = 'opacity 0.3s ease';
+            }
+
+            // Add hover effect
+            card.addEventListener('mouseenter', () => {
+                if (addToCartButton) {
+                    addToCartButton.style.opacity = 1; // Make the button visible
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (addToCartButton) {
+                    addToCartButton.style.opacity = 0; // Hide the button
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+    $(".do").each(function() {
+        $(this).click(function() {
+            var productId = $(this).data("product-id");
+            
+            if (!productId) {
+                console.error("Product ID is missing!");
+                return;
+            }
+
+            // Send the POST request
+            $.ajax({
+                url: "/cart/add/",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ product_id: productId }),
+                success: function(response) {
+                    console.log("Added to cart successfully:", response);
+                    $("#cart-badge").text(response.cart_count);
+                    $("#cart-badge").removeClass("bg-danger").addClass("text-warning");
+                },
+                error: function(error) {
+                    console.error("Error adding to cart:", error);
+                }
+            });
+        });
+    });
+});
+
+  $.getJSON('/cart/', function(response) {
+  if (response.success) {
+    $("#change-num").text(response.cart_count);
+  } else {
+    console.error("Error fetching cart data:", response.message);
+  }
+});
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const addToCartButtons = document.querySelectorAll(".btn-warning");
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const productId = this.dataset.productId;
+
+                fetch("/cart/add/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ product_id: productId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        // Display error message
+                        showFlashMessage(data.error, "danger");
+                    } else {
+                        // Display success message
+                        showFlashMessage(data.message, "success");
+
+                        // Optionally update cart count
+                        const cartCountElement = document.getElementById("cart-count");
+                        if (cartCountElement) {
+                            cartCountElement.textContent = data.cart_count;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error("Error adding to cart:", error);
+                    showFlashMessage("An unexpected error occurred.", "danger");
+                });
+            });
+        });
+
+        // Function to display flash messages
+        function showFlashMessage(message, type) {
+            const flashMessage = document.createElement("div");
+            flashMessage.className = `alert alert-${type} alert-dismissible fade show`;
+            flashMessage.role = "alert";
+            flashMessage.innerHTML = `
+                <strong>${message}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+
+            // Add the flash message to a container
+            const flashContainer = document.getElementById("flash-container");
+            flashContainer.appendChild(flashMessage);
+
+            // Remove the message after 5 seconds
+            setTimeout(() => {
+                flashMessage.remove();
+            }, 5000);
+        }
+    });
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'admin/header.html' %}
+
+{% block body %}
+ 
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+    <div class="container mt-5">
+        <h1 class="mb-4">All Payments</h1>
+        {% if payments %}
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Order ID</th>
+                        <th>Payment Amount</th>
+                        <th>Payment Date</th>
+                        <th>Payment Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ payment.payment_order_id }}</td>
+                            <td>&#8358;{{ payment.payment_amt }}</td>
+                            <td>{{ payment.payment_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ payment.payment_status }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No payments found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

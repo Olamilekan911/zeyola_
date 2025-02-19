@@ -1,6 +1,6 @@
 DBPASS="123456"
 SECRET_KEY='CTB2JadTECLTVA'
-SQLALCHEMY_DATABASE_URI='mysql+mysqlconnector://root@localhost/currentdb'
+SQLALCHEMY_DATABASE_URI='mysql+mysqlconnector://root@localhost/zentdb'
 SQLALCHEMY_TRACK_MODIFICATIONS=True
 
 # MAIL_SERVER = 'smtp.gmail.com'

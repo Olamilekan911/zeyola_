@@ -1,38 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+{% extends 'admin/header.html' %} 
+{% block body %}
 
-    <table class="table table-dark table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Customer ID</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
-                <th scope="col">Email</th>
-                <th scope="col">Date Joined</th>
-    
-            </tr>
-    
-        </thead>
-        <tbody>
-            {% for customer in customers %}
-            <tr>
-            <td>{{ customer.id }}</td>
-            <td>{{ customer.fname }}</td>
-            <td>{{ customer.lname }}</td>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.date_joined }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+ 
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 5px;">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+    <div class="container mt-5">
+        <h1 class="text-center">Customer List</h1>
+        <table class="table table-bordered table-striped mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.fname }}</td>
+                    <td>{{ customer.lname }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.address or 'N/A' }}</td>
+                    <td>{{ customer.date_joined.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 
-</body>
-</html>
+
+{% endblock %}
